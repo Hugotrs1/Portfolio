@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState, type FormEvent } from 'react';
 
+import type { Dictionary } from '@/i18n';
 import { initEmailJs, sendContactEmail, type ContactPayload } from '@/lib/emailjs';
 
 import { ArrowUpRight } from './icons';
@@ -17,7 +18,7 @@ const fieldClass =
 const labelClass =
   'label pointer-events-none absolute left-0 top-6 text-paper/50 transition-all duration-300 peer-focus:top-0 peer-focus:text-paper peer-autofill:top-0 peer-[:not(:placeholder-shown)]:top-0';
 
-export function ContactForm() {
+export function ContactForm({ t }: { t: Dictionary['contact']['form'] }) {
   const [form, setForm] = useState<ContactPayload>(emptyForm);
   const [sending, setSending] = useState(false);
   const [feedback, setFeedback] = useState<Feedback>(null);
@@ -45,11 +46,11 @@ export function ContactForm() {
     };
 
     if (!payload.name || !payload.email || !payload.message) {
-      setFeedback({ kind: 'error', message: 'Merci de remplir tous les champs.' });
+      setFeedback({ kind: 'error', message: t.missing });
       return;
     }
     if (!emailPattern.test(payload.email)) {
-      setFeedback({ kind: 'error', message: 'Adresse email invalide.' });
+      setFeedback({ kind: 'error', message: t.invalidEmail });
       return;
     }
 
@@ -57,15 +58,9 @@ export function ContactForm() {
     try {
       await sendContactEmail(payload);
       setForm(emptyForm);
-      setFeedback({ kind: 'success', message: 'Merci, ton message a bien été envoyé.' });
-    } catch (error) {
-      setFeedback({
-        kind: 'error',
-        message:
-          error instanceof Error
-            ? error.message
-            : "Impossible d'envoyer le message pour le moment. Réessaie plus tard.",
-      });
+      setFeedback({ kind: 'success', message: t.success });
+    } catch {
+      setFeedback({ kind: 'error', message: t.error });
     } finally {
       setSending(false);
     }
@@ -80,12 +75,12 @@ export function ContactForm() {
             name="name"
             autoComplete="name"
             required
-            placeholder="Nom"
+            placeholder={t.name}
             value={form.name}
             onChange={(event) => update('name')(event.target.value)}
             className={fieldClass}
           />
-          <span className={labelClass}>Nom</span>
+          <span className={labelClass}>{t.name}</span>
         </label>
         <label className="relative block">
           <input
@@ -93,12 +88,12 @@ export function ContactForm() {
             name="email"
             autoComplete="email"
             required
-            placeholder="Email"
+            placeholder={t.email}
             value={form.email}
             onChange={(event) => update('email')(event.target.value)}
             className={fieldClass}
           />
-          <span className={labelClass}>Email</span>
+          <span className={labelClass}>{t.email}</span>
         </label>
       </div>
 
@@ -107,12 +102,12 @@ export function ContactForm() {
           name="message"
           required
           rows={4}
-          placeholder="Message"
+          placeholder={t.message}
           value={form.message}
           onChange={(event) => update('message')(event.target.value)}
           className={`${fieldClass} resize-none`}
         />
-        <span className={labelClass}>Message</span>
+        <span className={labelClass}>{t.message}</span>
       </label>
 
       <div className="flex flex-wrap items-center justify-between gap-6">
@@ -121,7 +116,7 @@ export function ContactForm() {
           disabled={sending}
           className="group bg-paper text-ink hover:bg-accent hover:text-paper inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-sm transition-colors duration-300 disabled:opacity-60"
         >
-          {sending ? 'Envoi en cours' : 'Envoyer le message'}
+          {sending ? t.sending : t.send}
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </button>
 
@@ -138,7 +133,7 @@ export function ContactForm() {
               {feedback.message}
             </motion.p>
           ) : (
-            <p className="label text-paper/50">Réponse sous 24 h</p>
+            <p className="label text-paper/50">{t.hint}</p>
           )}
         </AnimatePresence>
       </div>

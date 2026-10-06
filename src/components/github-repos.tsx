@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import { person } from '@/data/profile';
+import type { Dictionary } from '@/i18n';
 
 import { ArrowUpRight } from './icons';
 import { easeOutExpo } from './reveal';
@@ -21,9 +22,8 @@ type Repo = {
 
 type Status = 'loading' | 'ready' | 'error';
 
-const dateFormat = new Intl.DateTimeFormat('fr-FR', { month: 'short', year: 'numeric' });
-
-export function GithubRepos() {
+export function GithubRepos({ t }: { t: Dictionary['github'] }) {
+  const dateFormat = new Intl.DateTimeFormat(t.dateLocale, { month: 'short', year: 'numeric' });
   const [repos, setRepos] = useState<Repo[]>([]);
   const [status, setStatus] = useState<Status>('loading');
 
@@ -53,7 +53,7 @@ export function GithubRepos() {
   if (status === 'error') {
     return (
       <p className="text-ink-soft">
-        Dépôts indisponibles pour le moment. Retrouvez-les sur{' '}
+        {t.unavailable}{' '}
         <a
           href={person.github}
           target="_blank"
@@ -99,7 +99,7 @@ export function GithubRepos() {
                     <span>
                       {[
                         repo.language,
-                        repo.stargazers_count > 0 ? `${repo.stargazers_count} étoiles` : null,
+                        repo.stargazers_count > 0 ? `${repo.stargazers_count} ${t.stars}` : null,
                         dateFormat.format(new Date(repo.pushed_at)),
                       ]
                         .filter(Boolean)
@@ -118,7 +118,7 @@ export function GithubRepos() {
         rel="noreferrer noopener"
         className="link-underline mt-8 inline-flex items-center gap-2 text-sm"
       >
-        Tous les dépôts sur GitHub
+        {t.all}
         <ArrowUpRight />
       </a>
     </div>

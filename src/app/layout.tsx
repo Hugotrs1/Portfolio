@@ -14,16 +14,8 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hugotrs1.github.io/Portfolio'),
-  title: 'Hugo Troussel — Développeur informatique (Flutter & Java)',
-  description:
-    'Portfolio de Hugo Troussel, développeur informatique en alternance chez Agelid. Refonte de GarezVous (Flutter), projets et dépôts GitHub.',
-  openGraph: {
-    title: 'Hugo Troussel — Développeur informatique',
-    description: 'Développeur informatique en alternance — Flutter & Java.',
-    url: 'https://hugotrs1.github.io/Portfolio',
-    type: 'website',
-  },
+  metadataBase: new URL('https://hugotrs1.github.io/Portfolio/'),
+  title: 'Hugo Troussel',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

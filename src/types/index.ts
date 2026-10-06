@@ -1,4 +1,8 @@
-export type SkillLevel = 'Avancé' | 'Intermédiaire' | 'Débutant';
+export type ProjectId = 'garezvous' | 'whatsapp' | 'videGrenier' | 'apiValorant';
+
+export type NowId = 'ai' | 'code' | 'games';
+
+export type SkillLevel = 'advanced' | 'intermediate' | 'beginner';
 
 export type Skill = {
   name: string;
@@ -11,41 +15,17 @@ export type ExternalLink = {
   url: string;
 };
 
-export type Picture = {
-  src: string;
-  alt: string;
-};
-
 export type Project = {
-  title: string;
+  id: ProjectId;
   kind: 'pro' | 'cours';
-  description: string;
   tags: string[];
   links: ExternalLink[];
-  cover?: Picture;
-  role?: string;
-  achievements?: string[];
-  screens?: Picture[];
-  webScreen?: Picture;
-};
-
-export type Experience = {
-  company: string;
-  role: string;
-  period: string;
-  details: string;
-  technologies: string[];
-  current?: boolean;
-};
-
-export type Education = {
-  title: string;
-  school: string;
-  year: string;
+  cover?: string;
+  screens?: string[];
+  webScreen?: string;
 };
 
 export type NowItem = {
-  title: string;
-  body: string;
-  image: Picture;
+  id: NowId;
+  image: string;
 };

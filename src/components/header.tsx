@@ -1,23 +1,17 @@
 'use client';
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { person } from '@/data/profile';
+import type { Dictionary } from '@/i18n';
 import { asset } from '@/lib/base-path';
 
 import { Container } from './container';
 import { easeOutExpo } from './reveal';
 
-const navItems = [
-  { label: 'Profil', href: '#profil' },
-  { label: 'Projets', href: '#projets' },
-  { label: 'Compétences', href: '#competences' },
-  { label: 'GitHub', href: '#github' },
-  { label: 'Contact', href: '#contact' },
-];
-
-export function Header() {
+export function Header({ nav }: { nav: Dictionary['nav'] }) {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -32,6 +26,17 @@ export function Header() {
   useEffect(() => {
     document.documentElement.style.overflow = open ? 'hidden' : '';
   }, [open]);
+
+  const languageSwitch = (
+    <Link
+      href={nav.switchHref}
+      title={nav.switchTitle}
+      hrefLang={nav.switchLabel.toLowerCase()}
+      className="label text-muted hover:text-ink transition-colors"
+    >
+      {nav.switchLabel}
+    </Link>
+  );
 
   return (
     <>
@@ -48,11 +53,11 @@ export function Header() {
             className="font-serif text-2xl leading-none"
             onClick={() => setOpen(false)}
           >
-            Hugo Troussel
+            {person.name}
           </a>
 
-          <nav aria-label="Navigation principale" className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
+          <nav aria-label={nav.label} className="hidden items-center gap-8 md:flex">
+            {nav.items.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -61,25 +66,29 @@ export function Header() {
                 {item.label}
               </a>
             ))}
+            {languageSwitch}
             <a
               href={asset(person.cvPath)}
               target="_blank"
               rel="noreferrer noopener"
               className="border-ink hover:bg-ink hover:text-paper rounded-full border px-4 py-1.5 text-sm transition-colors duration-300"
             >
-              CV
+              {nav.cv}
             </a>
           </nav>
 
-          <button
-            type="button"
-            onClick={() => setOpen((value) => !value)}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            className="label relative z-10 md:hidden"
-          >
-            {open ? 'Fermer' : 'Menu'}
-          </button>
+          <div className="relative z-10 flex items-center gap-6 md:hidden">
+            {languageSwitch}
+            <button
+              type="button"
+              onClick={() => setOpen((value) => !value)}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              className="label"
+            >
+              {open ? nav.close : nav.open}
+            </button>
+          </div>
         </Container>
       </motion.header>
 
@@ -94,21 +103,23 @@ export function Header() {
             className="bg-paper fixed inset-0 z-40 flex flex-col justify-end pb-12 md:hidden"
           >
             <Container>
-              <nav aria-label="Navigation mobile" className="border-line flex flex-col border-t">
-                {[...navItems, { label: 'CV', href: asset(person.cvPath) }].map((item, index) => (
-                  <motion.a
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.15 + index * 0.05, ease: easeOutExpo }}
-                    className="border-line flex items-baseline justify-between border-b py-4 font-serif text-4xl"
-                  >
-                    {item.label}
-                    <span className="label text-muted">0{index + 1}</span>
-                  </motion.a>
-                ))}
+              <nav aria-label={nav.mobileLabel} className="border-line flex flex-col border-t">
+                {[...nav.items, { label: nav.cv, href: asset(person.cvPath) }].map(
+                  (item, index) => (
+                    <motion.a
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.15 + index * 0.05, ease: easeOutExpo }}
+                      className="border-line flex items-baseline justify-between border-b py-4 font-serif text-4xl"
+                    >
+                      {item.label}
+                      <span className="label text-muted">0{index + 1}</span>
+                    </motion.a>
+                  ),
+                )}
               </nav>
             </Container>
           </motion.div>

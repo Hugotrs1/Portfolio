@@ -5,12 +5,19 @@ import Image from 'next/image';
 import { useRef } from 'react';
 
 import { asset } from '@/lib/base-path';
-import type { Picture, Project } from '@/types';
+import type { Dictionary, ProjectText } from '@/i18n/types';
+import type { Project } from '@/types';
 
 import { ArrowUpRight } from './icons';
 import { Reveal } from './reveal';
 
-export function FeaturedProject({ project }: { project: Project }) {
+type FeaturedProjectProps = {
+  project: Project;
+  text: ProjectText;
+  labels: Dictionary['projects'];
+};
+
+export function FeaturedProject({ project, text, labels }: FeaturedProjectProps) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const coverY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
@@ -25,21 +32,21 @@ export function FeaturedProject({ project }: { project: Project }) {
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-4">
           <Reveal>
-            <p className="label text-accent">Projet professionnel — en production</p>
-            <h3 className="mt-4 font-serif text-6xl leading-none sm:text-7xl">{project.title}</h3>
-            <p className="text-ink-soft mt-6 leading-relaxed">{project.description}</p>
+            <p className="label text-accent">{labels.featuredLabel}</p>
+            <h3 className="mt-4 font-serif text-6xl leading-none sm:text-7xl">{text.title}</h3>
+            <p className="text-ink-soft mt-6 leading-relaxed">{text.description}</p>
           </Reveal>
 
           <Reveal delay={0.1}>
             <dl className="border-line mt-10 space-y-6 border-t pt-6 text-sm leading-relaxed">
-              {project.role ? (
+              {text.role ? (
                 <div>
-                  <dt className="label text-muted">Rôle</dt>
-                  <dd className="mt-1.5">{project.role}</dd>
+                  <dt className="label text-muted">{labels.roleLabel}</dt>
+                  <dd className="mt-1.5">{text.role}</dd>
                 </div>
               ) : null}
               <div>
-                <dt className="label text-muted">Stack</dt>
+                <dt className="label text-muted">{labels.stackLabel}</dt>
                 <dd className="mt-1.5">{project.tags.join(', ')}</dd>
               </div>
             </dl>
@@ -65,7 +72,7 @@ export function FeaturedProject({ project }: { project: Project }) {
           {project.cover ? (
             <motion.div style={{ y: coverY }} className="absolute inset-[-10%_0] opacity-40">
               <Image
-                src={asset(project.cover.src)}
+                src={asset(project.cover)}
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 66vw, 100vw"
@@ -76,8 +83,9 @@ export function FeaturedProject({ project }: { project: Project }) {
           <div className="relative flex min-h-[34rem] items-center justify-center gap-4 px-6 py-16 sm:gap-8 sm:py-24">
             {project.screens?.map((screen, index) => (
               <Phone
-                key={screen.src}
-                screen={screen}
+                key={screen}
+                src={screen}
+                alt={text.screenAlts?.[index] ?? ''}
                 y={offsets[index % offsets.length]}
                 className={index === 1 ? 'w-[34%] max-w-60' : 'w-[28%] max-w-48'}
               />
@@ -86,13 +94,13 @@ export function FeaturedProject({ project }: { project: Project }) {
         </div>
       </div>
 
-      {project.achievements || project.webScreen ? (
+      {text.achievements || project.webScreen ? (
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
-          {project.achievements ? (
+          {text.achievements ? (
             <Reveal className="lg:col-span-4">
-              <h4 className="label text-muted">Réalisations</h4>
+              <h4 className="label text-muted">{labels.achievementsLabel}</h4>
               <ol className="mt-4">
-                {project.achievements.map((item, index) => (
+                {text.achievements.map((item, index) => (
                   <li
                     key={item}
                     className="border-line flex gap-4 border-t py-4 text-sm leading-relaxed last:border-b"
@@ -118,17 +126,15 @@ export function FeaturedProject({ project }: { project: Project }) {
                     <span className="label text-muted ml-4 truncate">garezvous.fr</span>
                   </div>
                   <Image
-                    src={asset(project.webScreen.src)}
-                    alt={project.webScreen.alt}
+                    src={asset(project.webScreen)}
+                    alt={text.webAlt ?? ''}
                     width={1600}
                     height={757}
                     sizes="(min-width: 1024px) 66vw, 100vw"
                     className="h-auto w-full"
                   />
                 </div>
-                <figcaption className="label text-muted mt-3">
-                  Version web : même code Flutter que le mobile
-                </figcaption>
+                <figcaption className="label text-muted mt-3">{labels.webCaption}</figcaption>
               </figure>
             </Reveal>
           ) : null}
@@ -139,11 +145,13 @@ export function FeaturedProject({ project }: { project: Project }) {
 }
 
 function Phone({
-  screen,
+  src,
+  alt,
   y,
   className,
 }: {
-  screen: Picture;
+  src: string;
+  alt: string;
   y: MotionValue<number>;
   className: string;
 }) {
@@ -151,8 +159,8 @@ function Phone({
     <motion.div style={{ y }} className={className}>
       <div className="rounded-[1.6rem] bg-[#0b0b0a] p-1.5 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10">
         <Image
-          src={asset(screen.src)}
-          alt={screen.alt}
+          src={asset(src)}
+          alt={alt}
           width={600}
           height={1300}
           sizes="(min-width: 1024px) 240px, 30vw"

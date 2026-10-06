@@ -1,4 +1,5 @@
 import { person } from '@/data/profile';
+import type { Dictionary } from '@/i18n';
 import { asset } from '@/lib/base-path';
 
 import { ContactForm } from './contact-form';
@@ -7,26 +8,26 @@ import { ArrowUpRight } from './icons';
 import { Reveal } from './reveal';
 import { SplitText } from './split-text';
 
-const links = [
-  { label: 'GitHub', href: person.github },
-  { label: 'LinkedIn', href: person.linkedin },
-  { label: 'CV (PDF)', href: asset(person.cvPath) },
-];
+export function Contact({ contact }: { contact: Dictionary['contact'] }) {
+  const links = [
+    { label: 'GitHub', href: person.github },
+    { label: 'LinkedIn', href: person.linkedin },
+    { label: contact.cvLabel, href: asset(person.cvPath) },
+  ];
 
-export function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="bg-ink text-paper">
       <Container className="py-24 sm:py-32">
         <p className="label text-paper/50">
           <span className="text-accent">06</span>
           <span className="mx-2">/</span>
-          Contact
+          {contact.label}
         </p>
 
         <SplitText
           as="h2"
           id="contact-title"
-          text={'Une idée, un projet, une question ?'}
+          text={contact.title}
           className="mt-8 max-w-5xl font-serif text-5xl leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl"
         />
 
@@ -42,10 +43,7 @@ export function Contact() {
 
         <div className="border-paper/15 mt-24 grid gap-16 border-t pt-12 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-4">
-            <p className="text-paper/70 max-w-xs leading-relaxed">
-              Le plus simple : un mail avec le contexte (sujet, stack, objectif). Sinon, le
-              formulaire fait très bien l&apos;affaire.
-            </p>
+            <p className="text-paper/70 max-w-xs leading-relaxed">{contact.intro}</p>
             <ul className="mt-10 space-y-3">
               {links.map((link) => (
                 <li key={link.label}>
@@ -64,7 +62,7 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
-            <ContactForm />
+            <ContactForm t={contact.form} />
           </Reveal>
         </div>
       </Container>

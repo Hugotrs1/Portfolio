@@ -1,11 +1,12 @@
 import Image from 'next/image';
 
 import { skillLevels, skills } from '@/data/skills';
+import type { Dictionary } from '@/i18n';
 import { asset } from '@/lib/base-path';
 
 import { Reveal } from './reveal';
 
-export function Skills() {
+export function Skills({ levels }: { levels: Dictionary['skills']['levels'] }) {
   return (
     <div>
       {skillLevels.map((level, levelIndex) => {
@@ -27,7 +28,7 @@ export function Skills() {
                   />
                 ))}
               </span>
-              <h3 className="label text-muted">{level}</h3>
+              <h3 className="label text-muted">{levels[level]}</h3>
             </div>
 
             <ul className="flex flex-wrap gap-x-10 gap-y-6 lg:col-span-9">

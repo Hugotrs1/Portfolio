@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>CV — Hugo Troussel — Développeur informatique</title>
+    <meta name="author" content="Hugo Troussel" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      :root {
+        --ink: #1c1b18;
+        --muted: #5f5b54;
+        --accent: #b2421e;
+        --line: #ddd7cc;
+        --tint: #f4f0e8;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, Arial, Helvetica, sans-serif;
+        font-size: 8.9pt;
+        line-height: 1.42;
+        color: var(--ink);
+      }
+      p {
+        margin: 0;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 11mm 15mm 7mm;
+        background: var(--tint);
+        border-bottom: 2px solid var(--accent);
+      }
+      header .identity {
+        flex: 1;
+      }
+      h1 {
+        margin: 0;
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-size: 31pt;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.3px;
+      }
+      .title {
+        margin-top: 4px;
+        font-size: 10.5pt;
+        font-weight: 600;
+        color: var(--accent);
+      }
+      .contact {
+        margin-top: 7px;
+        color: var(--muted);
+      }
+      .contact span + span::before {
+        content: '·';
+        margin: 0 6px;
+        color: var(--accent);
+      }
+      .avatar {
+        width: 64px;
+        height: 64px;
+        flex: none;
+      }
+
+      main {
+        padding: 5mm 15mm 0;
+      }
+      h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 11px 0 6px;
+        font-size: 8.4pt;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-variant-ligatures: none;
+        font-kerning: none;
+      }
+      h2::after {
+        content: '';
+        flex: 1;
+        height: 0.75px;
+        background: var(--line);
+      }
+
+      .summary {
+        padding-left: 10px;
+        border-left: 2px solid var(--accent);
+        font-size: 9.3pt;
+      }
+
+      .entry {
+        margin-bottom: 7px;
+      }
+      .entry-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      h3 {
+        margin: 0;
+        font-size: 9.6pt;
+        font-weight: 600;
+      }
+      h3 .org {
+        font-weight: 500;
+        color: var(--accent);
+      }
+      .date {
+        flex: none;
+        font-size: 8.4pt;
+        color: var(--muted);
+      }
+      .sub {
+        color: var(--muted);
+      }
+      ul {
+        margin: 3px 0 0;
+        padding-left: 13px;
+      }
+      li {
+        margin-bottom: 1.5px;
+      }
+      li::marker {
+        color: var(--accent);
+      }
+      .env {
+        margin-top: 3px;
+        font-size: 8.4pt;
+        color: var(--muted);
+      }
+      .env b {
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      .skills {
+        display: grid;
+        grid-template-columns: 26mm 1fr;
+        row-gap: 4px;
+        align-items: baseline;
+      }
+      .skills dt {
+        font-weight: 600;
+      }
+      .skills dd {
+        margin: 0;
+      }
+      .tag {
+        display: inline-block;
+        margin: 0 2px 2px 0;
+        padding: 0.5px 6px;
+        border-radius: 3px;
+        background: var(--tint);
+      }
+      .tag.strong {
+        background: var(--accent);
+        color: #fff;
+      }
+      .legend {
+        display: block;
+        margin-top: 1px;
+        font-size: 7.8pt;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="identity">
+        <h1>Hugo Troussel</h1>
+        <p class="title">Développeur informatique en alternance — Flutter &amp; Java</p>
+        <p class="contact">
+          <span>07 49 57 94 14</span>
+          <span>trousselhugo@gmail.com</span>
+          <span>Gournay-en-Bray (76220)</span>
+          <span>Permis B, véhiculé</span>
+        </p>
+        <p class="contact">
+          <span>hugotrs1.github.io/Portfolio</span>
+          <span>github.com/Hugotrs1</span>
+          <span>linkedin.com/in/hugotroussel</span>
+        </p>
+      </div>
+      <svg class="avatar" viewBox="0 0 64 64" role="img" aria-label="Photo de profil">
+        <circle cx="32" cy="32" r="32" fill="#e4ded3" />
+        <circle cx="32" cy="25" r="11" fill="#b9b2a6" />
+        <path d="M11 55c3-11 11-17 21-17s18 6 21 17a32 32 0 0 1-42 0z" fill="#b9b2a6" />
+      </svg>
+    </header>
+
+    <main>
+      <h2>Profil</h2>
+      <p class="summary">
+        Développeur informatique en alternance chez Agelid, éditeur de logiciels pour les
+        collectivités. Titulaire du titre Développeur Informatique (Bac+2), en dernière année de
+        Bachelor Concepteur Développeur d'Applications au CESI Rouen. Je développe le front mobile
+        et web de GarezVous en Flutter, une application de stationnement en production sur iOS,
+        Android et web. Autonome, attentif au besoin métier et à la qualité du code.
+      </p>
+
+      <h2>Expérience professionnelle</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Développeur en alternance — <span class="org">Agelid, Gournay-en-Bray</span></h3>
+          <span class="date">Octobre 2025 – aujourd'hui</span>
+        </div>
+        <ul>
+          <li>
+            Refonte de GarezVous, application de stationnement ponctuel destinée aux usagers des
+            collectivités (iOS, Android et web), proposée comme module de la plateforme Logipol Web.
+          </li>
+          <li>
+            Ajout du stationnement avec compte et du stationnement sans compte, à partir de la seule
+            plaque d'immatriculation.
+          </li>
+          <li>
+            Refonte du design et du code : composants réutilisables et une seule base de code
+            Flutter pour le mobile et le web.
+          </li>
+          <li>
+            Intégration du parcours de paiement en ligne (PayZen) et évolutions du back-office
+            Logipol Web lié à GarezVous.
+          </li>
+        </ul>
+        <p class="env">
+          <b>Environnement :</b> Flutter, Dart, API REST, Java, JSP, SVN, Bugzilla, méthode Agile
+        </p>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Stagiaire développeur mobile — <span class="org">Agelid, Gournay-en-Bray</span></h3>
+          <span class="date">Mars 2025 – Juin 2025</span>
+        </div>
+        <ul>
+          <li>
+            Réalisation d'un POC (proof of concept) : intégration d'une fonctionnalité de
+            stationnement dans une application mobile existante, à partir de données simulées.
+          </li>
+        </ul>
+        <p class="env"><b>Environnement :</b> Flutter, Dart, Java</p>
+      </div>
+
+      <h2>Formation</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>
+            Bachelor Concepteur Développeur d'Applications (Bac+3) —
+            <span class="org">CESI Rouen</span>
+          </h3>
+          <span class="date">2026 – 2027</span>
+        </div>
+        <p class="sub">En cours, en alternance (1 semaine en formation / 3 semaines en entreprise)</p>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>
+            Titre professionnel Développeur Informatique (Bac+2) — <span class="org">CESI Rouen</span>
+          </h3>
+          <span class="date">2024 – 2026</span>
+        </div>
+        <p class="sub">Obtenu, en alternance chez Agelid</p>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>
+            Baccalauréat général, spécialités Mathématiques et NSI —
+            <span class="org">Lycée Jacques Prévert, Pont-Audemer</span>
+          </h3>
+          <span class="date">2024</span>
+        </div>
+      </div>
+
+      <h2>Projets</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Clone de WhatsApp</h3>
+          <span class="date">Flutter, Dart, PHP, PostgreSQL</span>
+        </div>
+        <p>
+          Messagerie mobile adossée à une API PHP écrite sans framework : authentification par
+          jeton, conversations, demandes d'amis et profils.
+        </p>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Vide Grenier en ligne</h3>
+          <span class="date">PHP, MariaDB, Docker, PHPUnit</span>
+        </div>
+        <p>
+          Site de petites annonces en PHP (MVC), conteneurisé avec Docker sur trois environnements
+          (dev, recette, prod) et testé avec PHPUnit.
+        </p>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>API Valorant</h3>
+          <span class="date">PHP, MySQL, JavaScript</span>
+        </div>
+        <p>API exposant les informations des agents du jeu Valorant, consommée par un front-end.</p>
+      </div>
+
+      <h2>Compétences</h2>
+      <dl class="skills">
+        <dt>Langages</dt>
+        <dd>
+          <span class="tag strong">Flutter</span> <span class="tag strong">Dart</span>
+          <span class="tag">Java</span> <span class="tag">JSP</span> <span class="tag">SQL</span>
+          <span class="tag">HTML</span> <span class="tag">CSS</span> <span class="tag">JavaScript</span>
+          <span class="tag">PHP</span> <span class="tag">Python</span>
+          <span class="legend">(Flutter et Dart : avancé ; Java, JSP, SQL, HTML, CSS : intermédiaire ; JavaScript, PHP, Python : notions)</span>
+        </dd>
+        <dt>Outils</dt>
+        <dd>
+          <span class="tag">Git</span> <span class="tag">GitHub</span> <span class="tag">SVN</span>
+          <span class="tag">Docker</span> <span class="tag">VS Code</span>
+          <span class="tag">Bugzilla</span>
+        </dd>
+        <dt>Méthodes</dt>
+        <dd>Agile, API REST, conception d'interfaces responsive, tests</dd>
+        <dt>Savoir-être</dt>
+        <dd>Autonomie, sens de l'écoute, travail en équipe, créativité</dd>
+      </dl>
+
+      <h2>Langues et centres d'intérêt</h2>
+      <dl class="skills">
+        <dt>Langues</dt>
+        <dd>Français : langue maternelle · Anglais : intermédiaire (B2) · Espagnol : notions</dd>
+        <dt>Intérêts</dt>
+        <dd>
+          Jeux vidéo (compétitifs et solo), veille technologique et IA, créations numériques,
+          voyages, Formule 1
+        </dd>
+      </dl>
+    </main>
+  </body>
+</html>

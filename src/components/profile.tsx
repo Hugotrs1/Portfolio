@@ -1,18 +1,21 @@
-import { education, experiences } from '@/data/experience';
-import { person } from '@/data/profile';
+import type { Dictionary } from '@/i18n';
 
 import { Reveal } from './reveal';
 
-export function Profile() {
+export function Profile({ profile }: { profile: Dictionary['profile'] }) {
   return (
     <div className="space-y-24">
       <Reveal className="lg:ml-[25%] lg:pl-2">
-        <p className="max-w-4xl font-serif text-3xl leading-[1.2] sm:text-4xl">{person.about}</p>
+        <p className="max-w-4xl font-serif text-3xl leading-[1.2] sm:text-4xl">{profile.about}</p>
       </Reveal>
 
-      <Timeline title="Expérience">
-        {experiences.map((item) => (
-          <Row key={`${item.role}-${item.period}`} period={item.period} current={item.current}>
+      <Timeline title={profile.experienceTitle}>
+        {profile.experiences.map((item) => (
+          <Row
+            key={`${item.role}-${item.period}`}
+            period={item.period}
+            current={item.current ? profile.current : undefined}
+          >
             <h4 className="text-xl">
               {item.role} <span className="text-muted">— {item.company}</span>
             </h4>
@@ -22,8 +25,8 @@ export function Profile() {
         ))}
       </Timeline>
 
-      <Timeline title="Formation">
-        {education.map((item) => (
+      <Timeline title={profile.educationTitle}>
+        {profile.education.map((item) => (
           <Row key={item.title} period={item.year}>
             <h4 className="text-xl">{item.title}</h4>
             <p className="text-ink-soft mt-2">{item.school}</p>
@@ -49,7 +52,7 @@ function Row({
   children,
 }: {
   period: string;
-  current?: boolean;
+  current?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -57,7 +60,7 @@ function Row({
       <Reveal className="grid gap-3 sm:grid-cols-9 sm:gap-8">
         <p className="label text-muted pt-1.5 sm:col-span-3">
           {period}
-          {current ? <span className="text-accent ml-3">En cours</span> : null}
+          {current ? <span className="text-accent ml-3">{current}</span> : null}
         </p>
         <div className="sm:col-span-6">{children}</div>
       </Reveal>
