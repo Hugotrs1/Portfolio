@@ -5,11 +5,14 @@ export const projects: Project[] = [
     title: "GarezVous",
     kind: "pro",
     description:
-      "Application de stationnement de la ville de Nouméa (iOS & Android) : abonnement, gestion des véhicules et paiement en ligne, adossée à un back-office métier (cartes d'abonnement, factures, tickets).",
-    role: "Front de l'application mobile (Flutter) et back-office (Java/JSP).",
-    highlight:
-      "Module cartographique : l'usager sélectionne sa zone de stationnement par géolocalisation et est placé automatiquement dans la bonne zone.",
-    tags: ["Flutter", "Dart", "Java", "JSP", "Géolocalisation"],
+      "Application de stationnement ponctuel destinée aux usagers des collectivités. Les communes clientes d'Agelid l'activent comme module depuis Logipol Web, la plateforme principale de l'entreprise.",
+    role: "Refonte de l'application, sur mobile et sur web.",
+    achievements: [
+      "Ajout du stationnement avec compte.",
+      "Ajout du stationnement sans compte, à partir de la seule plaque d'immatriculation.",
+      "Refonte du design et du code de l'application.",
+    ],
+    tags: ["Flutter", "Dart"],
     links: [
       { label: "Site", url: "https://www.garezvous.fr/" },
       { label: "App Store", url: "https://apps.apple.com/fr/app/garezvous-fr/id6742316147" },
@@ -23,10 +26,20 @@ export const projects: Project[] = [
       alt: "Vue aérienne d'un parking urbain",
     },
     screens: [
-      { src: "/images/garezvous/screen-2.webp", alt: "Écran de bienvenue de GarezVous" },
-      { src: "/images/garezvous/screen-1.webp", alt: "Écran d'accueil de GarezVous" },
-      { src: "/images/garezvous/screen-3.webp", alt: "Gestion des véhicules dans GarezVous" },
+      { src: "/images/garezvous/mobile-menu.jpg", alt: "Menu de navigation de GarezVous" },
+      {
+        src: "/images/garezvous/mobile-accueil.jpg",
+        alt: "Accueil de GarezVous avec l'accès au stationnement sans compte",
+      },
+      {
+        src: "/images/garezvous/mobile-abonnements.jpg",
+        alt: "Cartes d'abonnement et leurs statuts dans GarezVous",
+      },
     ],
+    webScreen: {
+      src: "/images/garezvous/web-vehicules.jpg",
+      alt: "GarezVous Web : gestion des véhicules d'une carte d'abonnement",
+    },
   },
   {
     title: "Projet SQL — GTA",
@@ -35,10 +48,6 @@ export const projects: Project[] = [
       "Base de données relationnelle sur le thème de GTA : modélisation, jeux de données et requêtes.",
     tags: ["SQL", "MySQL"],
     links: [{ label: "GitHub", url: "https://github.com/Hugotrs1/Projet_SQL" }],
-    cover: {
-      src: "/images/photos/city-night.webp",
-      alt: "Skyline de Los Angeles de nuit",
-    },
   },
   {
     title: "API Valorant",
@@ -47,9 +56,5 @@ export const projects: Project[] = [
       "API exposant les informations des agents du jeu Valorant, consommée par un front-end de consultation.",
     tags: ["PHP", "MySQL", "JavaScript"],
     links: [{ label: "GitHub", url: "https://github.com/Hugotrs1/API_VALO" }],
-    cover: {
-      src: "/images/photos/controller.webp",
-      alt: "Manette de jeu rétroéclairée",
-    },
   },
 ];

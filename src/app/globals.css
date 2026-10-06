@@ -65,6 +65,16 @@ body::after {
   outline-offset: 4px;
 }
 
+/* Chrome peint les champs auto-remplis en bleu clair : on garde le fond sombre. */
+.dark-field:-webkit-autofill,
+.dark-field:-webkit-autofill:hover,
+.dark-field:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--paper);
+  -webkit-box-shadow: 0 0 0 1000px var(--ink) inset;
+  caret-color: var(--paper);
+  transition: background-color 9999s ease-out 0s;
+}
+
 .label {
   font-family: var(--font-mono);
   font-size: 0.72rem;

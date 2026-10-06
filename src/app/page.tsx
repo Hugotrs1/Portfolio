@@ -60,7 +60,7 @@ export default function Home() {
           index="04"
           label="En ce moment"
           title="Ce qui m'occupe."
-          intro="Ce sur quoi je me forme et ce que je suis de près en ce moment."
+          intro="Ce que j'apprends en ce moment, et ce qui m'occupe en dehors du code."
         >
           <Now />
         </Section>

@@ -13,16 +13,16 @@ export const nowItems: NowItem[] = [
     title: "Approfondir Flutter & Java",
     body: "Je continue de monter en compétence sur les langages que j'utilise au quotidien, côté mobile comme côté back-office.",
     image: {
-      src: "/images/photos/smartphone.webp",
-      alt: "Smartphone affichant « Eat, Sleep, Code, Repeat »",
+      src: "/images/photos/code.webp",
+      alt: "Ordinateur portable affichant du code dans un éditeur",
     },
   },
   {
-    title: "Logique métier durable",
-    body: "J'apprends à concevoir un back-end clair et maintenable, en m'appuyant sur un vrai logiciel en production.",
+    title: "Jeux vidéo",
+    body: "En dehors du code, je joue aussi bien à des jeux compétitifs qu'à des jeux solo, pour le challenge comme pour l'histoire.",
     image: {
-      src: "/images/photos/blueprint.webp",
-      alt: "Plan d'architecture en coupe sur papier bleu",
+      src: "/images/photos/controller.webp",
+      alt: "Manette de jeu rétroéclairée",
     },
   },
 ];

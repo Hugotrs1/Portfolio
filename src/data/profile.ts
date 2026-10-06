@@ -2,7 +2,7 @@ export const person = {
   name: "Hugo Troussel",
   firstName: "Hugo",
   lastName: "Troussel",
-  role: "Développeur fullstack",
+  role: "Développeur informatique",
   stack: "Flutter & Java",
   location: "Normandie, France",
   email: "trousselhugo@gmail.com",
@@ -12,7 +12,7 @@ export const person = {
   cvPath: "/cv-hugo-troussel.pdf",
   status: "En alternance chez Agelid",
   introduction:
-    "Je construis le front de l'application mobile de stationnement GarezVous en Flutter, et le back-office métier du logiciel qui l'accompagne en Java. J'aime autant soigner une interface qu'écrire une logique métier solide et durable.",
+    "Je travaille sur GarezVous, l'application de stationnement d'Agelid, sur mobile et sur web en Flutter. J'ai mené sa refonte et ajouté le stationnement avec et sans compte. J'aime autant soigner une interface que comprendre le métier qui se cache derrière.",
   about:
-    "Développeur fullstack en alternance, en formation au CESI Rouen. Au quotidien, je développe une application mobile et le back-office métier qui l'accompagne. Je travaille en grande autonomie, sans hésiter à demander des explications pour maîtriser les parties complexes d'un gros logiciel existant.",
+    "Alternant chez Agelid, éditeur de logiciels pour les collectivités, j'entame ma dernière année de Bachelor au CESI Rouen après avoir obtenu mon titre Développeur Informatique (Bac+2). Dans une équipe de trois développeurs, je porte le front de GarezVous de bout en bout : cadrage avec le back-end, conception des écrans, développement, tests et mise en production. Ma conviction : le code vient après la compréhension du besoin.",
 };

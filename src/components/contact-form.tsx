@@ -13,9 +13,9 @@ const emptyForm: ContactPayload = { name: "", email: "", message: "" };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const fieldClass =
-  "peer w-full border-b border-paper/25 bg-transparent pb-3 pt-6 text-lg text-paper outline-none transition-colors duration-300 placeholder:text-transparent focus:border-paper";
+  "dark-field peer w-full border-b border-paper/25 bg-transparent pb-3 pt-6 text-lg text-paper outline-none transition-colors duration-300 placeholder:text-transparent focus:border-paper";
 const labelClass =
-  "label pointer-events-none absolute left-0 top-6 text-paper/50 transition-all duration-300 peer-focus:top-0 peer-focus:text-paper peer-[:not(:placeholder-shown)]:top-0";
+  "label pointer-events-none absolute left-0 top-6 text-paper/50 transition-all duration-300 peer-focus:top-0 peer-focus:text-paper peer-autofill:top-0 peer-[:not(:placeholder-shown)]:top-0";
 
 export function ContactForm() {
   const [form, setForm] = useState<ContactPayload>(emptyForm);

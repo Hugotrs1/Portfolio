@@ -4,12 +4,27 @@ Portfolio personnel, développé avec Next.js (App Router), TypeScript, Tailwind
 Framer Motion et Lenis. Exporté en statique et déployé sur GitHub Pages :
 https://hugotrs1.github.io/Portfolio/
 
+## Prérequis
+
+Node.js 20 ou plus (version LTS recommandée) : https://nodejs.org/fr/download
+
 ## Développement
 
 ```bash
-npm install
-npm run dev
+npm install      # une seule fois, puis après chaque changement de dépendances
+npm run dev      # serveur local sur http://localhost:3000, rechargement à chaud
 ```
+
+## Compiler
+
+```bash
+npm run lint     # vérifie le code
+npm run build    # génère le site statique dans out/
+```
+
+Le dossier `out/` est prévu pour être servi sous `/Portfolio/` (GitHub Pages) : l'ouvrir
+directement depuis le disque ne fonctionne pas, il faut passer par le déploiement ou par
+`npm run dev`.
 
 Le formulaire de contact passe par EmailJS. En local, renseigner dans `.env.local` :
 

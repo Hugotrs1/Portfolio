@@ -22,10 +22,11 @@ export type Project = {
   description: string;
   tags: string[];
   links: ExternalLink[];
-  cover: Picture;
+  cover?: Picture;
   role?: string;
-  highlight?: string;
+  achievements?: string[];
   screens?: Picture[];
+  webScreen?: Picture;
 };
 
 export type Experience = {
