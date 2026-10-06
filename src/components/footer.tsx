@@ -18,7 +18,7 @@ export function Footer() {
       </Container>
       <p
         aria-hidden
-        className="text-paper/[0.06] text-center font-serif text-[15vw] leading-[0.75] tracking-tight whitespace-nowrap select-none"
+        className="text-paper/[0.06] text-center font-serif text-[15vw] leading-[0.75] tracking-tight whitespace-nowrap select-none pointer-events-none"
       >
         Hugo Troussel
       </p>

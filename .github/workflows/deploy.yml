@@ -31,11 +31,15 @@ jobs:
         run: npm ci
 
       - name: Build (export statique)
-        run: npm run build
+        run: |
+          for name in NEXT_PUBLIC_EMAILJS_PUBLIC_KEY NEXT_PUBLIC_EMAILJS_SERVICE_ID NEXT_PUBLIC_EMAILJS_TEMPLATE_ID; do
+            [ -n "${!name}" ] || { echo "::error::Secret GitHub manquant : $name"; exit 1; }
+          done
+          npm run build
         env:
-          NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: wwkDH3IoSRVpq6E6-
-          NEXT_PUBLIC_EMAILJS_SERVICE_ID: service_portfolio
-          NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: template_portfolio
+          NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
+          NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
+          NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
