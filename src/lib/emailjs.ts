@@ -1,6 +1,4 @@
-'use client';
-
-import emailjs from "@emailjs/browser";
+import emailjs from '@emailjs/browser';
 
 export type ContactPayload = {
   name: string;
@@ -14,7 +12,7 @@ const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
 
 export function initEmailJs() {
   if (!publicKey) {
-    console.warn("EmailJS public key manquante. Le formulaire restera inactif.");
+    console.warn('EmailJS public key manquante. Le formulaire restera inactif.');
     return;
   }
 

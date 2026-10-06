@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
@@ -10,7 +10,7 @@ export function ScrollProgress() {
     <motion.div
       aria-hidden
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-accent"
+      className="bg-accent fixed inset-x-0 top-0 z-[60] h-0.5 origin-left"
     />
   );
 }

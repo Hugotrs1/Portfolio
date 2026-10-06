@@ -1,7 +1,7 @@
-import { education, experiences } from "@/data/experience";
-import { person } from "@/data/profile";
+import { education, experiences } from '@/data/experience';
+import { person } from '@/data/profile';
 
-import { Reveal } from "./reveal";
+import { Reveal } from './reveal';
 
 export function Profile() {
   return (
@@ -16,8 +16,8 @@ export function Profile() {
             <h4 className="text-xl">
               {item.role} <span className="text-muted">— {item.company}</span>
             </h4>
-            <p className="mt-2 max-w-2xl leading-relaxed text-ink-soft">{item.details}</p>
-            <p className="label mt-4 text-muted">{item.technologies.join(" · ")}</p>
+            <p className="text-ink-soft mt-2 max-w-2xl leading-relaxed">{item.details}</p>
+            <p className="label text-muted mt-4">{item.technologies.join(' · ')}</p>
           </Row>
         ))}
       </Timeline>
@@ -26,7 +26,7 @@ export function Profile() {
         {education.map((item) => (
           <Row key={item.title} period={item.year}>
             <h4 className="text-xl">{item.title}</h4>
-            <p className="mt-2 text-ink-soft">{item.school}</p>
+            <p className="text-ink-soft mt-2">{item.school}</p>
           </Row>
         ))}
       </Timeline>
@@ -37,7 +37,7 @@ export function Profile() {
 function Timeline({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
-      <h3 className="label pt-7 text-muted lg:col-span-3">{title}</h3>
+      <h3 className="label text-muted pt-7 lg:col-span-3">{title}</h3>
       <ol className="lg:col-span-9">{children}</ol>
     </div>
   );
@@ -53,11 +53,11 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <li className="border-t border-line py-7 last:border-b">
+    <li className="border-line border-t py-7 last:border-b">
       <Reveal className="grid gap-3 sm:grid-cols-9 sm:gap-8">
-        <p className="label pt-1.5 text-muted sm:col-span-3">
+        <p className="label text-muted pt-1.5 sm:col-span-3">
           {period}
-          {current ? <span className="ml-3 text-accent">En cours</span> : null}
+          {current ? <span className="text-accent ml-3">En cours</span> : null}
         </p>
         <div className="sm:col-span-6">{children}</div>
       </Reveal>

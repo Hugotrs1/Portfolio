@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
-import { person } from "@/data/profile";
+import { person } from '@/data/profile';
 
-import { ArrowUpRight } from "./icons";
-import { easeOutExpo } from "./reveal";
+import { ArrowUpRight } from './icons';
+import { easeOutExpo } from './reveal';
 
 type Repo = {
   id: number;
@@ -19,13 +19,13 @@ type Repo = {
   fork: boolean;
 };
 
-type Status = "loading" | "ready" | "error";
+type Status = 'loading' | 'ready' | 'error';
 
-const dateFormat = new Intl.DateTimeFormat("fr-FR", { month: "short", year: "numeric" });
+const dateFormat = new Intl.DateTimeFormat('fr-FR', { month: 'short', year: 'numeric' });
 
 export function GithubRepos() {
   const [repos, setRepos] = useState<Repo[]>([]);
-  const [status, setStatus] = useState<Status>("loading");
+  const [status, setStatus] = useState<Status>('loading');
 
   useEffect(() => {
     const controller = new AbortController();
@@ -39,22 +39,27 @@ export function GithubRepos() {
       })
       .then((data) => {
         const list = data.filter((repo) => !repo.fork).slice(0, 6);
-        if (!list.length) throw new Error("Aucun dépôt");
+        if (!list.length) throw new Error('Aucun dépôt');
         setRepos(list);
-        setStatus("ready");
+        setStatus('ready');
       })
       .catch(() => {
-        if (!controller.signal.aborted) setStatus("error");
+        if (!controller.signal.aborted) setStatus('error');
       });
 
     return () => controller.abort();
   }, []);
 
-  if (status === "error") {
+  if (status === 'error') {
     return (
       <p className="text-ink-soft">
-        Dépôts indisponibles pour le moment. Retrouvez-les sur{" "}
-        <a href={person.github} target="_blank" rel="noreferrer noopener" className="link-underline text-ink">
+        Dépôts indisponibles pour le moment. Retrouvez-les sur{' '}
+        <a
+          href={person.github}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="link-underline text-ink"
+        >
           github.com/{person.githubUser}
         </a>
         .
@@ -64,11 +69,14 @@ export function GithubRepos() {
 
   return (
     <div>
-      <ul aria-busy={status === "loading"}>
-        {status === "loading"
+      <ul aria-busy={status === 'loading'}>
+        {status === 'loading'
           ? Array.from({ length: 4 }, (_, index) => (
-              <li key={index} className="flex h-[5.5rem] items-center border-t border-line last:border-b">
-                <span className="h-4 w-1/3 animate-pulse bg-paper-deep" />
+              <li
+                key={index}
+                className="border-line flex h-[5.5rem] items-center border-t last:border-b"
+              >
+                <span className="bg-paper-deep h-4 w-1/3 animate-pulse" />
               </li>
             ))
           : repos.map((repo, index) => (
@@ -77,25 +85,27 @@ export function GithubRepos() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.06, ease: easeOutExpo }}
-                className="border-t border-line last:border-b"
+                className="border-line border-t last:border-b"
               >
                 <a
                   href={repo.html_url}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="group grid items-baseline gap-2 py-6 transition-colors duration-300 hover:bg-paper-deep/60 sm:grid-cols-12 sm:gap-8 sm:px-3"
+                  className="group hover:bg-paper-deep/60 grid items-baseline gap-2 py-6 transition-colors duration-300 sm:grid-cols-12 sm:gap-8 sm:px-3"
                 >
                   <span className="font-mono text-base sm:col-span-4">{repo.name}</span>
-                  <span className="text-sm text-ink-soft sm:col-span-5">
-                    {repo.description}
-                  </span>
-                  <span className="label flex items-center justify-between gap-4 text-muted sm:col-span-3 sm:justify-end">
+                  <span className="text-ink-soft text-sm sm:col-span-5">{repo.description}</span>
+                  <span className="label text-muted flex items-center justify-between gap-4 sm:col-span-3 sm:justify-end">
                     <span>
-                      {[repo.language, repo.stargazers_count > 0 ? `${repo.stargazers_count} étoiles` : null, dateFormat.format(new Date(repo.pushed_at))]
+                      {[
+                        repo.language,
+                        repo.stargazers_count > 0 ? `${repo.stargazers_count} étoiles` : null,
+                        dateFormat.format(new Date(repo.pushed_at)),
+                      ]
                         .filter(Boolean)
-                        .join(" · ")}
+                        .join(' · ')}
                     </span>
-                    <ArrowUpRight className="h-4 w-4 text-ink transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" />
+                    <ArrowUpRight className="text-ink h-4 w-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </span>
                 </a>
               </motion.li>

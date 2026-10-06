@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import { skillLevels, skills } from "@/data/skills";
-import { asset } from "@/lib/base-path";
+import { skillLevels, skills } from '@/data/skills';
+import { asset } from '@/lib/base-path';
 
-import { Reveal } from "./reveal";
+import { Reveal } from './reveal';
 
 export function Skills() {
   return (
@@ -16,14 +16,14 @@ export function Skills() {
           <Reveal
             key={level}
             delay={levelIndex * 0.08}
-            className="grid gap-6 border-t border-line py-8 last:border-b lg:grid-cols-12 lg:gap-8"
+            className="border-line grid gap-6 border-t py-8 last:border-b lg:grid-cols-12 lg:gap-8"
           >
             <div className="flex items-center gap-4 lg:col-span-3">
               <span className="flex gap-1" aria-hidden>
                 {skillLevels.map((_, index) => (
                   <span
                     key={index}
-                    className={`h-3 w-1 ${index < filled ? "bg-accent" : "bg-line"}`}
+                    className={`h-3 w-1 ${index < filled ? 'bg-accent' : 'bg-line'}`}
                   />
                 ))}
               </span>
@@ -38,7 +38,7 @@ export function Skills() {
                     alt=""
                     width={32}
                     height={32}
-                    className="h-8 w-8 grayscale transition duration-500 group-hover:-rotate-6 group-hover:scale-110 group-hover:grayscale-0"
+                    className="h-8 w-8 grayscale transition duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:grayscale-0"
                   />
                   <span className="font-serif text-3xl">{skill.name}</span>
                 </li>

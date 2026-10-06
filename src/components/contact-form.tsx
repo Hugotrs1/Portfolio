@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState, type FormEvent } from "react";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState, type FormEvent } from 'react';
 
-import { initEmailJs, sendContactEmail, type ContactPayload } from "@/lib/emailjs";
+import { initEmailJs, sendContactEmail, type ContactPayload } from '@/lib/emailjs';
 
-import { ArrowUpRight } from "./icons";
+import { ArrowUpRight } from './icons';
 
-type Feedback = { kind: "success" | "error"; message: string } | null;
+type Feedback = { kind: 'success' | 'error'; message: string } | null;
 
-const emptyForm: ContactPayload = { name: "", email: "", message: "" };
+const emptyForm: ContactPayload = { name: '', email: '', message: '' };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const fieldClass =
-  "dark-field peer w-full border-b border-paper/25 bg-transparent pb-3 pt-6 text-lg text-paper outline-none transition-colors duration-300 placeholder:text-transparent focus:border-paper";
+  'dark-field peer w-full border-b border-paper/25 bg-transparent pb-3 pt-6 text-lg text-paper outline-none transition-colors duration-300 placeholder:text-transparent focus:border-paper';
 const labelClass =
-  "label pointer-events-none absolute left-0 top-6 text-paper/50 transition-all duration-300 peer-focus:top-0 peer-focus:text-paper peer-autofill:top-0 peer-[:not(:placeholder-shown)]:top-0";
+  'label pointer-events-none absolute left-0 top-6 text-paper/50 transition-all duration-300 peer-focus:top-0 peer-focus:text-paper peer-autofill:top-0 peer-[:not(:placeholder-shown)]:top-0';
 
 export function ContactForm() {
   const [form, setForm] = useState<ContactPayload>(emptyForm);
@@ -45,11 +45,11 @@ export function ContactForm() {
     };
 
     if (!payload.name || !payload.email || !payload.message) {
-      setFeedback({ kind: "error", message: "Merci de remplir tous les champs." });
+      setFeedback({ kind: 'error', message: 'Merci de remplir tous les champs.' });
       return;
     }
     if (!emailPattern.test(payload.email)) {
-      setFeedback({ kind: "error", message: "Adresse email invalide." });
+      setFeedback({ kind: 'error', message: 'Adresse email invalide.' });
       return;
     }
 
@@ -57,10 +57,10 @@ export function ContactForm() {
     try {
       await sendContactEmail(payload);
       setForm(emptyForm);
-      setFeedback({ kind: "success", message: "Merci, ton message a bien été envoyé." });
+      setFeedback({ kind: 'success', message: 'Merci, ton message a bien été envoyé.' });
     } catch (error) {
       setFeedback({
-        kind: "error",
+        kind: 'error',
         message:
           error instanceof Error
             ? error.message
@@ -82,7 +82,7 @@ export function ContactForm() {
             required
             placeholder="Nom"
             value={form.name}
-            onChange={(event) => update("name")(event.target.value)}
+            onChange={(event) => update('name')(event.target.value)}
             className={fieldClass}
           />
           <span className={labelClass}>Nom</span>
@@ -95,7 +95,7 @@ export function ContactForm() {
             required
             placeholder="Email"
             value={form.email}
-            onChange={(event) => update("email")(event.target.value)}
+            onChange={(event) => update('email')(event.target.value)}
             className={fieldClass}
           />
           <span className={labelClass}>Email</span>
@@ -109,7 +109,7 @@ export function ContactForm() {
           rows={4}
           placeholder="Message"
           value={form.message}
-          onChange={(event) => update("message")(event.target.value)}
+          onChange={(event) => update('message')(event.target.value)}
           className={`${fieldClass} resize-none`}
         />
         <span className={labelClass}>Message</span>
@@ -119,10 +119,10 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={sending}
-          className="group inline-flex items-center gap-3 rounded-full bg-paper px-7 py-3.5 text-sm text-ink transition-colors duration-300 hover:bg-accent hover:text-paper disabled:opacity-60"
+          className="group bg-paper text-ink hover:bg-accent hover:text-paper inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-sm transition-colors duration-300 disabled:opacity-60"
         >
-          {sending ? "Envoi en cours" : "Envoyer le message"}
-          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          {sending ? 'Envoi en cours' : 'Envoyer le message'}
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </button>
 
         <AnimatePresence mode="wait">
@@ -133,7 +133,7 @@ export function ContactForm() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className={`text-sm ${feedback.kind === "error" ? "text-[#f0a58a]" : "text-paper"}`}
+              className={`text-sm ${feedback.kind === 'error' ? 'text-[#f0a58a]' : 'text-paper'}`}
             >
               {feedback.message}
             </motion.p>

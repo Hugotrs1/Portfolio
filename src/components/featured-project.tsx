@@ -97,7 +97,7 @@ export function FeaturedProject({ project }: { project: Project }) {
                     key={item}
                     className="border-line flex gap-4 border-t py-4 text-sm leading-relaxed last:border-b"
                   >
-                    <span className="label w-6 shrink-0 pt-0.5 text-accent">
+                    <span className="label text-accent w-6 shrink-0 pt-0.5">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     {item}

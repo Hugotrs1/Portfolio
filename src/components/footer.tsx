@@ -1,24 +1,24 @@
-import { person } from "@/data/profile";
+import { person } from '@/data/profile';
 
-import { Container } from "./container";
+import { Container } from './container';
 
 export function Footer() {
   return (
-    <footer className="overflow-hidden bg-ink text-paper">
+    <footer className="bg-ink text-paper overflow-hidden">
       <Container>
-        <div className="label flex flex-col justify-between gap-4 border-t border-paper/15 py-8 text-paper/50 sm:flex-row">
+        <div className="label border-paper/15 text-paper/50 flex flex-col justify-between gap-4 border-t py-8 sm:flex-row">
           <p>
             © {new Date().getFullYear()} {person.name}
           </p>
           <p>Next.js · TypeScript · Tailwind CSS · Framer Motion</p>
-          <a href="#top" className="link-underline self-start text-paper sm:self-auto">
+          <a href="#top" className="link-underline text-paper self-start sm:self-auto">
             Retour en haut
           </a>
         </div>
       </Container>
       <p
         aria-hidden
-        className="select-none whitespace-nowrap text-center font-serif text-[15vw] leading-[0.75] tracking-tight text-paper/[0.06]"
+        className="text-paper/[0.06] text-center font-serif text-[15vw] leading-[0.75] tracking-tight whitespace-nowrap select-none"
       >
         Hugo Troussel
       </p>

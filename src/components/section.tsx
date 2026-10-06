@@ -1,8 +1,8 @@
-import type { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from 'react';
 
-import { Container } from "./container";
-import { Reveal } from "./reveal";
-import { SplitText } from "./split-text";
+import { Container } from './container';
+import { Reveal } from './reveal';
+import { SplitText } from './split-text';
 
 type SectionProps = PropsWithChildren<{
   id: string;
@@ -10,14 +10,13 @@ type SectionProps = PropsWithChildren<{
   label: string;
   title: string;
   intro?: ReactNode;
-  className?: string;
 }>;
 
-export function Section({ id, index, label, title, intro, className = "", children }: SectionProps) {
+export function Section({ id, index, label, title, intro, children }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className={`py-24 sm:py-32 ${className}`}>
+    <section id={id} aria-labelledby={`${id}-title`} className="py-24 sm:py-32">
       <Container>
-        <div className="grid gap-y-6 border-t border-line pt-6 lg:grid-cols-12 lg:gap-x-8">
+        <div className="border-line grid gap-y-6 border-t pt-6 lg:grid-cols-12 lg:gap-x-8">
           <p className="label text-muted lg:col-span-3">
             <span className="text-accent">{index}</span>
             <span className="mx-2">/</span>
@@ -31,7 +30,7 @@ export function Section({ id, index, label, title, intro, className = "", childr
               className="font-serif text-5xl leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl"
             />
             {intro ? (
-              <Reveal delay={0.15} className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
+              <Reveal delay={0.15} className="text-ink-soft mt-6 max-w-xl text-lg leading-relaxed">
                 {intro}
               </Reveal>
             ) : null}

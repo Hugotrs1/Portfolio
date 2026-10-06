@@ -1,4 +1,4 @@
-export type SkillLevel = "Avancé" | "Intermédiaire" | "Débutant";
+export type SkillLevel = 'Avancé' | 'Intermédiaire' | 'Débutant';
 
 export type Skill = {
   name: string;
@@ -18,7 +18,7 @@ export type Picture = {
 
 export type Project = {
   title: string;
-  kind: "pro" | "cours";
+  kind: 'pro' | 'cours';
   description: string;
   tags: string[];
   links: ExternalLink[];
@@ -33,7 +33,6 @@ export type Experience = {
   company: string;
   role: string;
   period: string;
-  location: string;
   details: string;
   technologies: string[];
   current?: boolean;

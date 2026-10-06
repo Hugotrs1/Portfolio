@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --paper: #f2eee6;
@@ -40,12 +40,12 @@ html.lenis body {
 body {
   background: var(--paper);
   color: var(--ink);
-  font-feature-settings: "ss01", "cv11";
+  font-feature-settings: 'ss01', 'cv11';
 }
 
 /* Grain de papier, très léger, posé sur toute la page. */
 body::after {
-  content: "";
+  content: '';
   position: fixed;
   inset: 0;
   z-index: 100;

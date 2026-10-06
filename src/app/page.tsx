@@ -1,20 +1,20 @@
-import { Contact } from "@/components/contact";
-import { FeaturedProject } from "@/components/featured-project";
-import { Footer } from "@/components/footer";
-import { GithubRepos } from "@/components/github-repos";
-import { Header } from "@/components/header";
-import { Hero } from "@/components/hero";
-import { Marquee } from "@/components/marquee";
-import { Now } from "@/components/now";
-import { Profile } from "@/components/profile";
-import { ProjectList } from "@/components/project-list";
-import { ScrollProgress } from "@/components/scroll-progress";
-import { Section } from "@/components/section";
-import { Skills } from "@/components/skills";
-import { projects } from "@/data/projects";
+import { Contact } from '@/components/contact';
+import { FeaturedProject } from '@/components/featured-project';
+import { Footer } from '@/components/footer';
+import { GithubRepos } from '@/components/github-repos';
+import { Header } from '@/components/header';
+import { Hero } from '@/components/hero';
+import { Marquee } from '@/components/marquee';
+import { Now } from '@/components/now';
+import { Profile } from '@/components/profile';
+import { ProjectList } from '@/components/project-list';
+import { ScrollProgress } from '@/components/scroll-progress';
+import { Section } from '@/components/section';
+import { Skills } from '@/components/skills';
+import { projects } from '@/data/projects';
 
-const featured = projects.filter((project) => project.kind === "pro");
-const coursework = projects.filter((project) => project.kind === "cours");
+const featured = projects.filter((project) => project.kind === 'pro');
+const coursework = projects.filter((project) => project.kind === 'cours');
 
 export default function Home() {
   return (
