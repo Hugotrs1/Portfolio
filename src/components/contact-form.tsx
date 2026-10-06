@@ -1,156 +1,147 @@
-'use client';
+"use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState, type FormEvent } from "react";
 
-import { initEmailJs, sendContactEmail } from "@/lib/emailjs";
+import { initEmailJs, sendContactEmail, type ContactPayload } from "@/lib/emailjs";
 
-type FormState = {
-  name: string;
-  email: string;
-  message: string;
-};
+import { ArrowUpRight } from "./icons";
 
-type Status = "idle" | "loading" | "success" | "error";
+type Feedback = { kind: "success" | "error"; message: string } | null;
 
-const initialState: FormState = {
-  name: "",
-  email: "",
-  message: "",
-};
+const emptyForm: ContactPayload = { name: "", email: "", message: "" };
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const fieldClass =
+  "peer w-full border-b border-paper/25 bg-transparent pb-3 pt-6 text-lg text-paper outline-none transition-colors duration-300 placeholder:text-transparent focus:border-paper";
+const labelClass =
+  "label pointer-events-none absolute left-0 top-6 text-paper/50 transition-all duration-300 peer-focus:top-0 peer-focus:text-paper peer-[:not(:placeholder-shown)]:top-0";
 
 export function ContactForm() {
-  const [formState, setFormState] = useState<FormState>(initialState);
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
+  const [form, setForm] = useState<ContactPayload>(emptyForm);
+  const [sending, setSending] = useState(false);
+  const [feedback, setFeedback] = useState<Feedback>(null);
 
   useEffect(() => {
     initEmailJs();
   }, []);
 
-  const isDisabled = useMemo(() => status === "loading", [status]);
+  useEffect(() => {
+    if (!feedback) return;
+    const timeout = setTimeout(() => setFeedback(null), 5000);
+    return () => clearTimeout(timeout);
+  }, [feedback]);
 
-  const handleChange = (key: keyof FormState) => (value: string) => {
-    setFormState((prev) => ({ ...prev, [key]: value }));
-  };
+  const update = (key: keyof ContactPayload) => (value: string) =>
+    setForm((previous) => ({ ...previous, [key]: value }));
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError(null);
 
-    const trimmed = {
-      name: formState.name.trim(),
-      email: formState.email.trim(),
-      message: formState.message.trim(),
+    const payload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      message: form.message.trim(),
     };
 
-    if (!trimmed.name || !trimmed.email || !trimmed.message) {
-      setError("Merci de remplir tous les champs.");
+    if (!payload.name || !payload.email || !payload.message) {
+      setFeedback({ kind: "error", message: "Merci de remplir tous les champs." });
+      return;
+    }
+    if (!emailPattern.test(payload.email)) {
+      setFeedback({ kind: "error", message: "Adresse email invalide." });
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(trimmed.email)) {
-      setError("Adresse email invalide.");
-      return;
-    }
-
-    setStatus("loading");
-
+    setSending(true);
     try {
-      await sendContactEmail(trimmed);
-      setStatus("success");
-      setFormState(initialState);
-      setTimeout(() => setStatus("idle"), 4000);
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Impossible d'envoyer le message pour le moment. Réessaie plus tard."
-      );
-      setStatus("error");
-      setTimeout(() => {
-        setStatus("idle");
-        setError(null);
-      }, 4000);
+      await sendContactEmail(payload);
+      setForm(emptyForm);
+      setFeedback({ kind: "success", message: "Merci, ton message a bien été envoyé." });
+    } catch (error) {
+      setFeedback({
+        kind: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Impossible d'envoyer le message pour le moment. Réessaie plus tard.",
+      });
+    } finally {
+      setSending(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card-surface flex flex-col gap-4 p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="space-y-2 text-sm font-medium text-[color:var(--foreground)]">
-          Nom
+    <form onSubmit={handleSubmit} noValidate className="space-y-8">
+      <div className="grid gap-8 sm:grid-cols-2">
+        <label className="relative block">
           <input
             type="text"
             name="name"
             autoComplete="name"
             required
-            value={formState.name}
-            onChange={(event) => handleChange("name")(event.target.value)}
-            className="w-full rounded-xl border border-(--border) bg-(--card-muted) px-3 py-2 text-sm text-foreground shadow-inner outline-none transition focus:border-[color:var(--accent)] focus:ring-2 focus:ring-[color:var(--accent)]/30"
-            placeholder="Votre nom"
+            placeholder="Nom"
+            value={form.name}
+            onChange={(event) => update("name")(event.target.value)}
+            className={fieldClass}
           />
+          <span className={labelClass}>Nom</span>
         </label>
-        <label className="space-y-2 text-sm font-medium text-[color:var(--foreground)]">
-          Email
+        <label className="relative block">
           <input
             type="email"
             name="email"
             autoComplete="email"
             required
-            value={formState.email}
-            onChange={(event) => handleChange("email")(event.target.value)}
-            className="w-full rounded-xl border border-[color:var(--border)] bg-[color:var(--card-muted)] px-3 py-2 text-sm text-[color:var(--foreground)] shadow-inner outline-none transition focus:border-[color:var(--accent)] focus:ring-2 focus:ring-[color:var(--accent)]/30"
-            placeholder="votre@email.com"
+            placeholder="Email"
+            value={form.email}
+            onChange={(event) => update("email")(event.target.value)}
+            className={fieldClass}
           />
+          <span className={labelClass}>Email</span>
         </label>
       </div>
-      <label className="space-y-2 text-sm font-medium text-[color:var(--foreground)]">
-        Message
+
+      <label className="relative block">
         <textarea
           name="message"
           required
           rows={4}
-          value={formState.message}
-          onChange={(event) => handleChange("message")(event.target.value)}
-          className="w-full rounded-xl border border-[color:var(--border)] bg-[color:var(--card-muted)] px-3 py-2 text-sm text-[color:var(--foreground)] shadow-inner outline-none transition focus:border-[color:var(--accent)] focus:ring-2 focus:ring-[color:var(--accent)]/30"
-          placeholder="Décrivez votre besoin..."
+          placeholder="Message"
+          value={form.message}
+          onChange={(event) => update("message")(event.target.value)}
+          className={`${fieldClass} resize-none`}
         />
+        <span className={labelClass}>Message</span>
       </label>
-      <div className="flex items-center justify-between gap-3">
+
+      <div className="flex flex-wrap items-center justify-between gap-6">
         <button
           type="submit"
-          disabled={isDisabled}
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,var(--accent),var(--accent-soft))] px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--accent)] disabled:translate-y-0 disabled:opacity-60"
+          disabled={sending}
+          className="group inline-flex items-center gap-3 rounded-full bg-paper px-7 py-3.5 text-sm text-ink transition-colors duration-300 hover:bg-accent hover:text-paper disabled:opacity-60"
         >
-          {status === "loading" ? (
-            <>
-              <span className="h-4 w-4 animate-spin rounded-full border-[2px] border-white/60 border-t-white" />
-              Envoi...
-            </>
-          ) : (
-            "Envoyer"
-          )}
+          {sending ? "Envoi en cours" : "Envoyer le message"}
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </button>
-        <p className="text-xs text-[color:var(--foreground)]/70" aria-live="polite" role="status">
-          Réponse sous 24h max.
-        </p>
+
+        <AnimatePresence mode="wait">
+          {feedback ? (
+            <motion.p
+              key={feedback.message}
+              role="status"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              className={`text-sm ${feedback.kind === "error" ? "text-[#f0a58a]" : "text-paper"}`}
+            >
+              {feedback.message}
+            </motion.p>
+          ) : (
+            <p className="label text-paper/50">Réponse sous 24 h</p>
+          )}
+        </AnimatePresence>
       </div>
-      {error ? (
-        <p className="rounded-xl border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm font-medium text-red-200 shadow-inner">
-          {error}
-        </p>
-      ) : null}
-      {status === "success" ? (
-        <p className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm font-medium text-emerald-100 shadow-inner">
-          Merci ! Ton message a bien été envoyé.
-        </p>
-      ) : null}
-      {status === "error" && !error ? (
-        <p className="rounded-xl border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm font-medium text-red-200 shadow-inner">
-          Une erreur est survenue. Réessaie dans un instant.
-        </p>
-      ) : null}
     </form>
   );
 }

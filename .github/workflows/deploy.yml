@@ -10,7 +10,6 @@ permissions:
   pages: write
   id-token: write
 
-# Un seul déploiement à la fois.
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -34,8 +33,6 @@ jobs:
       - name: Build (export statique)
         run: npm run build
         env:
-          # Clés EmailJS publiques (exposées côté client de toute façon).
-          # Tu peux les déplacer en "Repository secrets" si tu préfères.
           NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: wwkDH3IoSRVpq6E6-
           NEXT_PUBLIC_EMAILJS_SERVICE_ID: service_portfolio
           NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: template_portfolio

@@ -1,30 +1,31 @@
+export type SkillLevel = "Avancé" | "Intermédiaire" | "Débutant";
+
 export type Skill = {
-  level: string;
   name: string;
   icon: string;
-  alt: string;
+  level: SkillLevel;
 };
 
-export type ProjectLink = {
+export type ExternalLink = {
   label: string;
   url: string;
 };
 
+export type Picture = {
+  src: string;
+  alt: string;
+};
+
 export type Project = {
   title: string;
-  description: string;
-  /** "pro" pour un projet professionnel mis en avant, "cours" pour un projet de formation. */
   kind: "pro" | "cours";
-  /** Stack / mots-clés affichés en tags. */
-  tags?: string[];
-  /** Rôle tenu sur le projet (affiché si présent). */
+  description: string;
+  tags: string[];
+  links: ExternalLink[];
+  cover: Picture;
   role?: string;
-  /** Point technique mis en avant (affiché en accent). */
   highlight?: string;
-  /** Liens (site, stores, dépôt…). Le premier est l'action principale. */
-  links?: ProjectLink[];
-  /** Conservé pour compatibilité : lien dépôt simple. */
-  repoUrl?: string;
+  screens?: Picture[];
 };
 
 export type Experience = {
@@ -34,7 +35,6 @@ export type Experience = {
   location: string;
   details: string;
   technologies: string[];
-  /** Marque l'expérience en cours (badge + accent). */
   current?: boolean;
 };
 
@@ -45,7 +45,7 @@ export type Education = {
 };
 
 export type NowItem = {
-  emoji: string;
   title: string;
   body: string;
+  image: Picture;
 };

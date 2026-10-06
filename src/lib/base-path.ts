@@ -1,7 +1,5 @@
-// Sur GitHub Pages le site est servi sous /Portfolio (basePath). Or next/image
-// en export statique "unoptimized" n'ajoute PAS le basePath aux fichiers de
-// public/. On préfixe donc manuellement les chemins d'assets via ce helper.
-// En dev (npm run dev) basePath est vide → les chemins restent à la racine.
+// En export statique, next/image (unoptimized) n'ajoute pas le basePath
+// aux fichiers de public/ : on le préfixe à la main.
 export const basePath = process.env.NODE_ENV === "production" ? "/Portfolio" : "";
 
 export const asset = (path: string) => `${basePath}${path}`;

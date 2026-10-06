@@ -1,38 +1,43 @@
 import type { PropsWithChildren, ReactNode } from "react";
+
 import { Container } from "./container";
 import { Reveal } from "./reveal";
+import { SplitText } from "./split-text";
 
 type SectionProps = PropsWithChildren<{
   id: string;
+  index: string;
+  label: string;
   title: string;
-  eyebrow?: string;
-  description?: ReactNode;
+  intro?: ReactNode;
   className?: string;
 }>;
 
-export function Section({ id, title, eyebrow, description, children, className = "" }: SectionProps) {
+export function Section({ id, index, label, title, intro, className = "", children }: SectionProps) {
   return (
-    <section id={id} className={`scroll-mt-24 py-16 sm:py-20 ${className}`} aria-label={title}>
-      <Container hover className="space-y-10">
-        <Reveal direction="down">
-          <header className="max-w-3xl space-y-3">
-            {eyebrow ? (
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--foreground)]/60">
-                {eyebrow}
-              </p>
+    <section id={id} aria-labelledby={`${id}-title`} className={`py-24 sm:py-32 ${className}`}>
+      <Container>
+        <div className="grid gap-y-6 border-t border-line pt-6 lg:grid-cols-12 lg:gap-x-8">
+          <p className="label text-muted lg:col-span-3">
+            <span className="text-accent">{index}</span>
+            <span className="mx-2">/</span>
+            {label}
+          </p>
+          <div className="lg:col-span-9">
+            <SplitText
+              as="h2"
+              id={`${id}-title`}
+              text={title}
+              className="font-serif text-5xl leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl"
+            />
+            {intro ? (
+              <Reveal delay={0.15} className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
+                {intro}
+              </Reveal>
             ) : null}
-            <h2 className="text-3xl font-semibold tracking-tight text-[color:var(--foreground)] sm:text-4xl">
-              {title}
-            </h2>
-            {description ? (
-              <div className="text-base leading-relaxed text-[color:var(--foreground)]/70">
-                {description}
-              </div>
-            ) : null}
-          </header>
-        </Reveal>
-
-        <Reveal direction="up">{children}</Reveal>
+          </div>
+        </div>
+        <div className="mt-16 sm:mt-20">{children}</div>
       </Container>
     </section>
   );

@@ -1,9 +1,12 @@
-'use client';
+"use client";
 
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 import { person } from "@/data/profile";
+
+import { ArrowUpRight } from "./icons";
+import { easeOutExpo } from "./reveal";
 
 type Repo = {
   id: number;
@@ -18,103 +21,96 @@ type Repo = {
 
 type Status = "loading" | "ready" | "error";
 
+const dateFormat = new Intl.DateTimeFormat("fr-FR", { month: "short", year: "numeric" });
+
 export function GithubRepos() {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [status, setStatus] = useState<Status>("loading");
 
   useEffect(() => {
-    let active = true;
+    const controller = new AbortController();
 
-    fetch(
-      `https://api.github.com/users/${person.githubUser}/repos?per_page=100&sort=pushed`
-    )
+    fetch(`https://api.github.com/users/${person.githubUser}/repos?per_page=100&sort=pushed`, {
+      signal: controller.signal,
+    })
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json() as Promise<Repo[]>;
       })
       .then((data) => {
-        if (!active) return;
-        // 6 dépôts publics (hors forks) les plus récemment mis à jour.
         const list = data.filter((repo) => !repo.fork).slice(0, 6);
-        if (!list.length) throw new Error("empty");
+        if (!list.length) throw new Error("Aucun dépôt");
         setRepos(list);
         setStatus("ready");
       })
       .catch(() => {
-        if (active) setStatus("error");
+        if (!controller.signal.aborted) setStatus("error");
       });
 
-    return () => {
-      active = false;
-    };
+    return () => controller.abort();
   }, []);
-
-  if (status === "loading") {
-    return (
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true">
-        {["s1", "s2", "s3", "s4", "s5", "s6"].map((key) => (
-          <div key={key} className="card-surface h-36 animate-pulse p-6 opacity-60" />
-        ))}
-      </div>
-    );
-  }
 
   if (status === "error") {
     return (
-      <p className="text-sm text-[color:var(--foreground)]/70">
-        Dépôts indisponibles pour le moment — voir{" "}
-        <Link
-          href={person.github}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="font-semibold text-[color:var(--accent-soft)] hover:underline"
-        >
-          github.com/{person.githubUser} ↗
-        </Link>
+      <p className="text-ink-soft">
+        Dépôts indisponibles pour le moment. Retrouvez-les sur{" "}
+        <a href={person.github} target="_blank" rel="noreferrer noopener" className="link-underline text-ink">
+          github.com/{person.githubUser}
+        </a>
         .
       </p>
     );
   }
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {repos.map((repo) => (
-        <Link
-          key={repo.id}
-          href={repo.html_url}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="card-surface flex flex-col gap-3 p-5"
-        >
-          <span className="text-base font-semibold text-[color:var(--foreground)]">
-            {repo.name}{" "}
-            <span aria-hidden className="text-[color:var(--accent-soft)]">
-              ↗
-            </span>
-          </span>
+    <div>
+      <ul aria-busy={status === "loading"}>
+        {status === "loading"
+          ? Array.from({ length: 4 }, (_, index) => (
+              <li key={index} className="flex h-[5.5rem] items-center border-t border-line last:border-b">
+                <span className="h-4 w-1/3 animate-pulse bg-paper-deep" />
+              </li>
+            ))
+          : repos.map((repo, index) => (
+              <motion.li
+                key={repo.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.06, ease: easeOutExpo }}
+                className="border-t border-line last:border-b"
+              >
+                <a
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="group grid items-baseline gap-2 py-6 transition-colors duration-300 hover:bg-paper-deep/60 sm:grid-cols-12 sm:gap-8 sm:px-3"
+                >
+                  <span className="font-mono text-base sm:col-span-4">{repo.name}</span>
+                  <span className="text-sm text-ink-soft sm:col-span-5">
+                    {repo.description}
+                  </span>
+                  <span className="label flex items-center justify-between gap-4 text-muted sm:col-span-3 sm:justify-end">
+                    <span>
+                      {[repo.language, repo.stargazers_count > 0 ? `${repo.stargazers_count} étoiles` : null, dateFormat.format(new Date(repo.pushed_at))]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </span>
+                    <ArrowUpRight className="h-4 w-4 text-ink transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" />
+                  </span>
+                </a>
+              </motion.li>
+            ))}
+      </ul>
 
-          <span className="flex-1 text-sm text-[color:var(--foreground)]/70">
-            {repo.description ?? "Pas encore de description."}
-          </span>
-
-          <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[color:var(--foreground)]/55">
-            {repo.language ? (
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-[color:var(--accent)]" />
-                {repo.language}
-              </span>
-            ) : null}
-            {repo.stargazers_count > 0 ? <span>★ {repo.stargazers_count}</span> : null}
-            <span>
-              maj{" "}
-              {new Date(repo.pushed_at).toLocaleDateString("fr-FR", {
-                month: "short",
-                year: "numeric",
-              })}
-            </span>
-          </span>
-        </Link>
-      ))}
+      <a
+        href={person.github}
+        target="_blank"
+        rel="noreferrer noopener"
+        className="link-underline mt-8 inline-flex items-center gap-2 text-sm"
+      >
+        Tous les dépôts sur GitHub
+        <ArrowUpRight />
+      </a>
     </div>
   );
 }

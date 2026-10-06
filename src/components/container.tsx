@@ -1,18 +1,7 @@
 import type { PropsWithChildren } from "react";
 
-type ContainerProps = PropsWithChildren<{
-  className?: string;
-  hover?: boolean;
-}>;
+type ContainerProps = PropsWithChildren<{ className?: string }>;
 
-export function Container({ className = "", children, hover = false }: ContainerProps) {
-  const baseClasses = "mx-auto max-w-6xl px-4 sm:px-6 lg:px-8";
-  const hoverClasses = hover ? "card-surface py-6 sm:py-8" : "";
-  const combinedClasses = [baseClasses, hoverClasses, className].filter(Boolean).join(" ");
-
-  return (
-    <div className={combinedClasses}>
-      {children}
-    </div>
-  );
+export function Container({ className = "", children }: ContainerProps) {
+  return <div className={`mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12 ${className}`}>{children}</div>;
 }
