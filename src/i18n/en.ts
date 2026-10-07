@@ -24,6 +24,7 @@ export const en: Dictionary = {
     switchLabel: 'FR',
     switchHref: '/',
     switchTitle: 'Version française',
+    switchName: 'Français',
   },
   hero: {
     status: 'Work-study at Agelid',
@@ -182,6 +183,8 @@ export const en: Dictionary = {
     unavailable: 'Repositories are unavailable right now. Find them on',
     all: 'All repositories on GitHub',
     stars: 'stars',
+    repos: 'public repositories',
+    languages: 'languages',
     dateLocale: 'en-GB',
   },
   contact: {
@@ -190,12 +193,15 @@ export const en: Dictionary = {
     intro:
       'The simplest way: an email with some context (topic, stack, goal). Otherwise, the form works just fine.',
     cvLabel: 'Resume (PDF, in French)',
+    copy: 'Copy address',
+    copied: 'Address copied',
     form: {
       name: 'Name',
       email: 'Email',
       message: 'Message',
       send: 'Send message',
       sending: 'Sending',
+      sent: 'Message sent',
       hint: 'Reply within 24 hours',
       missing: 'Please fill in all fields.',
       invalidEmail: 'Invalid email address.',

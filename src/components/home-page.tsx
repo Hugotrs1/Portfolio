@@ -8,6 +8,7 @@ import { Footer } from './footer';
 import { GithubRepos } from './github-repos';
 import { Header } from './header';
 import { Hero } from './hero';
+import { LanguageCurtain } from './language-switch';
 import { Marquee } from './marquee';
 import { Now } from './now';
 import { Profile } from './profile';
@@ -70,6 +71,7 @@ export function HomePage({ dict }: { dict: Dictionary }) {
       </main>
 
       <Footer backToTop={dict.footer.backToTop} />
+      <LanguageCurtain />
     </>
   );
 }

@@ -1,6 +1,19 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
 import { person } from '@/data/profile';
 
 import { Container } from './container';
+import { easeOutExpo } from './reveal';
+
+const letter = {
+  hidden: { y: '130%' },
+  visible: (index: number) => ({
+    y: '0%',
+    transition: { duration: 1.2, delay: index * 0.04, ease: easeOutExpo },
+  }),
+};
 
 export function Footer({ backToTop }: { backToTop: string }) {
   return (
@@ -16,12 +29,24 @@ export function Footer({ backToTop }: { backToTop: string }) {
           </a>
         </div>
       </Container>
-      <p
+      <motion.p
         aria-hidden
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
         className="text-paper/[0.06] pointer-events-none text-center font-serif text-[15vw] leading-[0.75] tracking-tight whitespace-nowrap select-none"
       >
-        Hugo Troussel
-      </p>
+        {[...person.name].map((character, index) => (
+          <motion.span
+            key={index}
+            custom={index}
+            variants={letter}
+            className="inline-block whitespace-pre"
+          >
+            {character}
+          </motion.span>
+        ))}
+      </motion.p>
     </footer>
   );
 }

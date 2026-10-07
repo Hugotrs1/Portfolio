@@ -1,3 +1,7 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
 type IconProps = { className?: string };
 
 export function ArrowUpRight({ className = 'h-3.5 w-3.5' }: IconProps) {
@@ -36,6 +40,21 @@ export function Close({ className = 'h-3.5 w-3.5' }: IconProps) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden className={className}>
       <path d="M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" strokeWidth="1.4" />
+    </svg>
+  );
+}
+
+export function Check({ className = 'h-3.5 w-3.5' }: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden className={className}>
+      <motion.path
+        d="M3 8.5l3.2 3.2L13 4.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
+      />
     </svg>
   );
 }

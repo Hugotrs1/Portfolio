@@ -106,19 +106,3 @@ body::after {
   filter: grayscale(0) contrast(1);
   transform: scale(1.04);
 }
-
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-track {
-  animation: marquee 40s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-}

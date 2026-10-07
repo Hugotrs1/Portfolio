@@ -8,6 +8,7 @@ import type { Dictionary } from '@/i18n';
 
 import { Container } from './container';
 import { ArrowDown } from './icons';
+import { Magnetic } from './magnetic';
 import { easeOutExpo } from './reveal';
 import { SplitText } from './split-text';
 
@@ -71,13 +72,15 @@ export function Hero({ hero }: { hero: Dictionary['hero'] }) {
             </motion.p>
 
             <motion.div {...fadeIn(0.75)} className="flex flex-wrap items-center gap-x-6 gap-y-4">
-              <a
-                href="#projets"
-                className="group bg-ink text-paper hover:bg-accent inline-flex items-center gap-3 rounded-full px-6 py-3 text-base transition-colors duration-300"
-              >
-                {hero.cta}
-                <ArrowDown className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-y-0.5" />
-              </a>
+              <Magnetic>
+                <a
+                  href="#projets"
+                  className="group bg-ink text-paper hover:bg-accent inline-flex items-center gap-3 rounded-full px-6 py-3 text-base transition-colors duration-300"
+                >
+                  {hero.cta}
+                  <ArrowDown className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-y-0.5" />
+                </a>
+              </Magnetic>
               <a href={`mailto:${person.email}`} className="link-underline text-base">
                 {person.email}
               </a>

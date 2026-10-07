@@ -6,7 +6,9 @@ import { useEffect, useState, type FormEvent } from 'react';
 import type { Dictionary } from '@/i18n';
 import { initEmailJs, sendContactEmail, type ContactPayload } from '@/lib/emailjs';
 
-import { ArrowUpRight } from './icons';
+import { ArrowUpRight, Check } from './icons';
+import { Magnetic } from './magnetic';
+import { easeOutExpo } from './reveal';
 
 type Feedback = { kind: 'success' | 'error'; message: string } | null;
 
@@ -22,10 +24,17 @@ export function ContactForm({ t }: { t: Dictionary['contact']['form'] }) {
   const [form, setForm] = useState<ContactPayload>(emptyForm);
   const [sending, setSending] = useState(false);
   const [feedback, setFeedback] = useState<Feedback>(null);
+  const [sent, setSent] = useState(false);
 
   useEffect(() => {
     initEmailJs();
   }, []);
+
+  useEffect(() => {
+    if (!sent) return;
+    const timeout = setTimeout(() => setSent(false), 4000);
+    return () => clearTimeout(timeout);
+  }, [sent]);
 
   useEffect(() => {
     if (!feedback) return;
@@ -58,6 +67,7 @@ export function ContactForm({ t }: { t: Dictionary['contact']['form'] }) {
     try {
       await sendContactEmail(payload);
       setForm(emptyForm);
+      setSent(true);
       setFeedback({ kind: 'success', message: t.success });
     } catch {
       setFeedback({ kind: 'error', message: t.error });
@@ -111,14 +121,34 @@ export function ContactForm({ t }: { t: Dictionary['contact']['form'] }) {
       </label>
 
       <div className="flex flex-wrap items-center justify-between gap-6">
-        <button
-          type="submit"
-          disabled={sending}
-          className="group bg-paper text-ink hover:bg-accent hover:text-paper inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-base transition-colors duration-300 disabled:opacity-60"
-        >
-          {sending ? t.sending : t.send}
-          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </button>
+        <Magnetic>
+          <button
+            type="submit"
+            disabled={sending || sent}
+            className={`group inline-flex items-center overflow-hidden rounded-full px-7 py-3.5 text-base transition-colors duration-500 ${
+              sent
+                ? 'bg-accent text-paper'
+                : 'bg-paper text-ink hover:bg-accent hover:text-paper disabled:opacity-60'
+            }`}
+          >
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.span
+                key={sent ? 'sent' : sending ? 'sending' : 'send'}
+                initial={{ y: '150%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '-150%' }}
+                transition={{ duration: 0.5, ease: easeOutExpo }}
+                className="inline-flex items-center gap-3"
+              >
+                {sent ? <Check className="h-4 w-4" /> : null}
+                {sent ? t.sent : sending ? t.sending : t.send}
+                {sent ? null : (
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                )}
+              </motion.span>
+            </AnimatePresence>
+          </button>
+        </Magnetic>
 
         <AnimatePresence mode="wait">
           {feedback ? (

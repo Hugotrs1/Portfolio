@@ -8,6 +8,7 @@ import { asset } from '@/lib/base-path';
 import type { Dictionary, ProjectText } from '@/i18n/types';
 import type { Project } from '@/types';
 
+import { BrowserFrame } from './browser-frame';
 import { ArrowUpRight } from './icons';
 import { Reveal } from './reveal';
 import { ScreenViewer, type Screen } from './screen-viewer';
@@ -140,13 +141,7 @@ export function FeaturedProject({ project, text, labels }: FeaturedProjectProps)
           {project.webScreen ? (
             <Reveal delay={0.1} className="lg:col-span-8">
               <figure>
-                <div className="ring-line overflow-hidden rounded-lg bg-[#e3ddd0] shadow-[0_40px_80px_-40px_rgba(0,0,0,0.45)] ring-1">
-                  <div className="flex items-center gap-1.5 px-4 py-3" aria-hidden>
-                    <span className="bg-ink/15 h-2.5 w-2.5 rounded-full" />
-                    <span className="bg-ink/15 h-2.5 w-2.5 rounded-full" />
-                    <span className="bg-ink/15 h-2.5 w-2.5 rounded-full" />
-                    <span className="label text-muted ml-4 truncate">garezvous.fr</span>
-                  </div>
+                <BrowserFrame url="garezvous.fr">
                   <Image
                     src={asset(project.webScreen)}
                     alt={text.webAlt ?? ''}
@@ -155,7 +150,7 @@ export function FeaturedProject({ project, text, labels }: FeaturedProjectProps)
                     sizes="(min-width: 1024px) 66vw, 100vw"
                     className="h-auto w-full"
                   />
-                </div>
+                </BrowserFrame>
                 <figcaption className="label text-muted mt-3">{labels.webCaption}</figcaption>
               </figure>
             </Reveal>

@@ -1,6 +1,11 @@
+'use client';
+
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { useRef, type ReactNode } from 'react';
+
 import type { Dictionary } from '@/i18n';
 
-import { Reveal } from './reveal';
+import { easeOutExpo, Reveal } from './reveal';
 
 export function Profile({ profile }: { profile: Dictionary['profile'] }) {
   return (
@@ -37,11 +42,23 @@ export function Profile({ profile }: { profile: Dictionary['profile'] }) {
   );
 }
 
-function Timeline({ title, children }: { title: string; children: React.ReactNode }) {
+function Timeline({ title, children }: { title: string; children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 65%', 'end 65%'] });
+  const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
+
   return (
     <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
       <h3 className="label text-muted pt-7 lg:col-span-3">{title}</h3>
-      <ol className="lg:col-span-9">{children}</ol>
+      <div ref={ref} className="relative lg:col-span-9">
+        <span aria-hidden className="bg-line absolute inset-y-0 left-0 w-px" />
+        <motion.span
+          aria-hidden
+          style={{ scaleY }}
+          className="bg-accent absolute inset-y-0 left-0 w-px origin-top"
+        />
+        <ol>{children}</ol>
+      </div>
     </div>
   );
 }
@@ -53,10 +70,18 @@ function Row({
 }: {
   period: string;
   current?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <li className="border-line border-t py-7 last:border-b">
+    <li className="border-line relative border-t py-7 pl-8 last:border-b sm:pl-10">
+      <motion.span
+        aria-hidden
+        initial={{ scale: 1, backgroundColor: '#f2eee6', borderColor: '#cfc9bf' }}
+        whileInView={{ scale: [1, 1.6, 1.2], backgroundColor: '#c4471f', borderColor: '#c4471f' }}
+        viewport={{ margin: '0px 0px -35% 0px' }}
+        transition={{ duration: 0.6, ease: easeOutExpo }}
+        className="absolute top-[2.2rem] -left-[4.5px] h-2.5 w-2.5 rounded-full border"
+      />
       <Reveal className="grid gap-3 sm:grid-cols-9 sm:gap-8">
         <p className="label text-muted pt-1.5 sm:col-span-3">
           {period}

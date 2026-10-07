@@ -1,10 +1,21 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 import { skillLevels, skills } from '@/data/skills';
 import type { Dictionary } from '@/i18n';
 import { asset } from '@/lib/base-path';
 
-import { Reveal } from './reveal';
+import { easeOutExpo, Reveal } from './reveal';
+
+const bar = {
+  empty: { scaleY: 0 },
+  filled: (delay: number) => ({
+    scaleY: 1,
+    transition: { duration: 0.7, delay: 0.3 + delay, ease: easeOutExpo },
+  }),
+};
 
 export function Skills({ levels }: { levels: Dictionary['skills']['levels'] }) {
   return (
@@ -20,14 +31,25 @@ export function Skills({ levels }: { levels: Dictionary['skills']['levels'] }) {
             className="border-line grid gap-6 border-t py-8 last:border-b lg:grid-cols-12 lg:gap-8"
           >
             <div className="flex items-center gap-4 lg:col-span-3">
-              <span className="flex gap-1" aria-hidden>
+              <motion.span
+                aria-hidden
+                initial="empty"
+                whileInView="filled"
+                viewport={{ once: true, margin: '-10% 0px' }}
+                className="flex gap-1"
+              >
                 {skillLevels.map((_, index) => (
-                  <span
-                    key={index}
-                    className={`h-3 w-1 ${index < filled ? 'bg-accent' : 'bg-line'}`}
-                  />
+                  <span key={index} className="bg-line relative h-4 w-1 overflow-hidden">
+                    {index < filled ? (
+                      <motion.span
+                        custom={levelIndex * 0.1 + index * 0.15}
+                        variants={bar}
+                        className="bg-accent absolute inset-0 origin-bottom"
+                      />
+                    ) : null}
+                  </span>
                 ))}
-              </span>
+              </motion.span>
               <h3 className="label text-muted">{levels[level]}</h3>
             </div>
 

@@ -3,6 +3,7 @@ import type { Dictionary } from '@/i18n';
 import { asset } from '@/lib/base-path';
 
 import { ContactForm } from './contact-form';
+import { CopyEmail } from './copy-email';
 import { Container } from './container';
 import { ArrowUpRight } from './icons';
 import { Reveal } from './reveal';
@@ -39,6 +40,9 @@ export function Contact({ contact }: { contact: Dictionary['contact'] }) {
             <span className="link-underline">{person.email}</span>
             <ArrowUpRight className="h-6 w-6 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 sm:h-8 sm:w-8" />
           </a>
+          <div className="mt-5">
+            <CopyEmail email={person.email} copy={contact.copy} copied={contact.copied} />
+          </div>
         </Reveal>
 
         <div className="border-paper/15 mt-24 grid gap-16 border-t pt-12 lg:grid-cols-12 lg:gap-8">

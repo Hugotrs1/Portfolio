@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { animate, motion, useInView, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 import { person } from '@/data/profile';
 import type { Dictionary } from '@/i18n';
@@ -21,11 +21,13 @@ type Repo = {
 };
 
 type Status = 'loading' | 'ready' | 'error';
+type Stats = { repos: number; languages: number };
 
 export function GithubRepos({ t }: { t: Dictionary['github'] }) {
   const dateFormat = new Intl.DateTimeFormat(t.dateLocale, { month: 'short', year: 'numeric' });
   const [repos, setRepos] = useState<Repo[]>([]);
   const [status, setStatus] = useState<Status>('loading');
+  const [stats, setStats] = useState<Stats>({ repos: 0, languages: 0 });
 
   useEffect(() => {
     const controller = new AbortController();
@@ -38,9 +40,13 @@ export function GithubRepos({ t }: { t: Dictionary['github'] }) {
         return res.json() as Promise<Repo[]>;
       })
       .then((data) => {
-        const list = data.filter((repo) => !repo.fork).slice(0, 6);
-        if (!list.length) throw new Error('Aucun dépôt');
-        setRepos(list);
+        const own = data.filter((repo) => !repo.fork);
+        if (!own.length) throw new Error('Aucun dépôt');
+        setRepos(own.slice(0, 6));
+        setStats({
+          repos: own.length,
+          languages: new Set(own.map((repo) => repo.language).filter(Boolean)).size,
+        });
         setStatus('ready');
       })
       .catch(() => {
@@ -69,6 +75,22 @@ export function GithubRepos({ t }: { t: Dictionary['github'] }) {
 
   return (
     <div>
+      {status === 'ready' ? (
+        <dl className="mb-12 flex gap-12 sm:gap-20">
+          {[
+            { value: stats.repos, label: t.repos },
+            { value: stats.languages, label: t.languages },
+          ].map((item) => (
+            <div key={item.label} className="flex flex-col-reverse gap-2">
+              <dt className="label text-muted">{item.label}</dt>
+              <dd className="font-serif text-6xl leading-none sm:text-7xl">
+                <CountUp value={item.value} />
+              </dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
+
       <ul aria-busy={status === 'loading'}>
         {status === 'loading'
           ? Array.from({ length: 4 }, (_, index) => (
@@ -122,5 +144,33 @@ export function GithubRepos({ t }: { t: Dictionary['github'] }) {
         <ArrowUpRight />
       </a>
     </div>
+  );
+}
+
+function CountUp({ value }: { value: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-10% 0px' });
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!inView || !node) return;
+    const controls = animate(0, value, {
+      duration: reduceMotion ? 0 : 1.6,
+      ease: easeOutExpo,
+      onUpdate: (current) => {
+        node.textContent = String(Math.round(current));
+      },
+    });
+    return () => controls.stop();
+  }, [inView, reduceMotion, value]);
+
+  return (
+    <>
+      <span ref={ref} aria-hidden>
+        0
+      </span>
+      <span className="sr-only">{value}</span>
+    </>
   );
 }

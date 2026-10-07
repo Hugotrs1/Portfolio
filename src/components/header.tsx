@@ -1,14 +1,15 @@
 'use client';
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { person } from '@/data/profile';
 import type { Dictionary } from '@/i18n';
 import { asset } from '@/lib/base-path';
 
 import { Container } from './container';
+import { LanguageSwitch } from './language-switch';
+import { Magnetic } from './magnetic';
 import { easeOutExpo } from './reveal';
 
 export function Header({ nav }: { nav: Dictionary['nav'] }) {
@@ -16,27 +17,30 @@ export function Header({ nav }: { nav: Dictionary['nav'] }) {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<{ href: string; x: number; width: number } | null>(null);
+  const links = useRef<Record<string, HTMLAnchorElement | null>>({});
 
   useMotionValueEvent(scrollY, 'change', (current) => {
     const previous = scrollY.getPrevious() ?? 0;
     setScrolled(current > 24);
     setHidden(current > previous && current > 240);
+
+    // Section active : la dernière dont le haut a dépassé le tiers de l'écran.
+    const line = window.innerHeight * 0.35;
+    const reached = nav.items.filter(
+      (item) => (document.querySelector(item.href)?.getBoundingClientRect().top ?? Infinity) < line,
+    );
+    const href = reached.at(-1)?.href;
+    if (href === active?.href) return;
+    const link = href ? links.current[href] : null;
+    setActive(href && link ? { href, x: link.offsetLeft, width: link.offsetWidth } : null);
   });
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? 'hidden' : '';
   }, [open]);
 
-  const languageSwitch = (
-    <Link
-      href={nav.switchHref}
-      title={nav.switchTitle}
-      hrefLang={nav.switchLabel.toLowerCase()}
-      className="label text-muted hover:text-ink transition-colors"
-    >
-      {nav.switchLabel}
-    </Link>
-  );
+  const languageSwitch = <LanguageSwitch nav={nav} />;
 
   return (
     <>
@@ -56,25 +60,44 @@ export function Header({ nav }: { nav: Dictionary['nav'] }) {
             {person.name}
           </a>
 
-          <nav aria-label={nav.label} className="hidden items-center gap-8 md:flex">
+          <nav aria-label={nav.label} className="relative hidden items-center gap-8 md:flex">
             {nav.items.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="link-underline text-ink-soft hover:text-ink text-[0.95rem]"
+                ref={(element) => {
+                  links.current[item.href] = element;
+                }}
+                aria-current={active?.href === item.href ? 'location' : undefined}
+                className={`link-underline hover:text-ink text-[0.95rem] transition-colors duration-300 ${
+                  active?.href === item.href ? 'text-ink' : 'text-ink-soft'
+                }`}
               >
                 {item.label}
               </a>
             ))}
+            <motion.span
+              aria-hidden
+              initial={false}
+              animate={{
+                x: active?.x ?? 0,
+                width: active?.width ?? 0,
+                opacity: active ? 1 : 0,
+              }}
+              transition={{ duration: 0.6, ease: easeOutExpo }}
+              className="bg-accent absolute -bottom-1 left-0 h-px"
+            />
             {languageSwitch}
-            <a
-              href={asset(person.cvPath)}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="border-ink hover:bg-ink hover:text-paper rounded-full border px-4 py-1.5 text-[0.95rem] transition-colors duration-300"
-            >
-              {nav.cv}
-            </a>
+            <Magnetic>
+              <a
+                href={asset(person.cvPath)}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="border-ink hover:bg-ink hover:text-paper rounded-full border px-4 py-1.5 text-[0.95rem] transition-colors duration-300"
+              >
+                {nav.cv}
+              </a>
+            </Magnetic>
           </nav>
 
           <div className="relative z-10 flex items-center gap-6 md:hidden">

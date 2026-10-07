@@ -24,6 +24,7 @@ export const fr: Dictionary = {
     switchLabel: 'EN',
     switchHref: '/en/',
     switchTitle: 'English version',
+    switchName: 'English',
   },
   hero: {
     status: 'En alternance chez Agelid',
@@ -179,6 +180,8 @@ export const fr: Dictionary = {
     unavailable: 'Dépôts indisponibles pour le moment. Retrouvez-les sur',
     all: 'Tous les dépôts sur GitHub',
     stars: 'étoiles',
+    repos: 'dépôts publics',
+    languages: 'langages',
     dateLocale: 'fr-FR',
   },
   contact: {
@@ -187,12 +190,15 @@ export const fr: Dictionary = {
     intro:
       "Le plus simple : un mail avec le contexte (sujet, stack, objectif). Sinon, le formulaire fait très bien l'affaire.",
     cvLabel: 'CV (PDF)',
+    copy: "Copier l'adresse",
+    copied: 'Adresse copiée',
     form: {
       name: 'Nom',
       email: 'Email',
       message: 'Message',
       send: 'Envoyer le message',
       sending: 'Envoi en cours',
+      sent: 'Message envoyé',
       hint: 'Réponse sous 24 h',
       missing: 'Merci de remplir tous les champs.',
       invalidEmail: 'Adresse email invalide.',

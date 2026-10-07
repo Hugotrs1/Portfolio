@@ -8,6 +8,7 @@ import type { Dictionary } from '@/i18n/types';
 import { asset } from '@/lib/base-path';
 
 import { ArrowLeft, ArrowRight, Close } from './icons';
+import { Magnetic } from './magnetic';
 import { easeOutExpo } from './reveal';
 
 export type Screen = { src: string; title: string; alt: string };
@@ -229,22 +230,26 @@ export function ScreenViewer({
           </div>
 
           <div className="mt-6 flex justify-center gap-3 lg:mt-10 lg:justify-start">
-            <button
-              type="button"
-              onClick={() => go(-1)}
-              aria-label={labels.previous}
-              className="hover:bg-paper hover:text-ink flex h-12 w-12 items-center justify-center rounded-full border border-white/25 transition-colors duration-300"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => go(1)}
-              aria-label={labels.next}
-              className="hover:bg-paper hover:text-ink flex h-12 w-12 items-center justify-center rounded-full border border-white/25 transition-colors duration-300"
-            >
-              <ArrowRight className="h-4 w-4" />
-            </button>
+            <Magnetic>
+              <button
+                type="button"
+                onClick={() => go(-1)}
+                aria-label={labels.previous}
+                className="hover:bg-paper hover:text-ink flex h-12 w-12 items-center justify-center rounded-full border border-white/25 transition-colors duration-300"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+            </Magnetic>
+            <Magnetic>
+              <button
+                type="button"
+                onClick={() => go(1)}
+                aria-label={labels.next}
+                className="hover:bg-paper hover:text-ink flex h-12 w-12 items-center justify-center rounded-full border border-white/25 transition-colors duration-300"
+              >
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </Magnetic>
           </div>
         </motion.div>
       </div>
