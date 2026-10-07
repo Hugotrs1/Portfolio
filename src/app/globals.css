@@ -40,6 +40,7 @@ html.lenis body {
 body {
   background: var(--paper);
   color: var(--ink);
+  font-size: 1.0625rem;
   font-feature-settings: 'ss01', 'cv11';
 }
 
@@ -77,7 +78,7 @@ body::after {
 
 .label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }

@@ -61,7 +61,7 @@ export function Header({ nav }: { nav: Dictionary['nav'] }) {
               <a
                 key={item.href}
                 href={item.href}
-                className="link-underline text-ink-soft hover:text-ink text-sm"
+                className="link-underline text-ink-soft hover:text-ink text-[0.95rem]"
               >
                 {item.label}
               </a>
@@ -71,7 +71,7 @@ export function Header({ nav }: { nav: Dictionary['nav'] }) {
               href={asset(person.cvPath)}
               target="_blank"
               rel="noreferrer noopener"
-              className="border-ink hover:bg-ink hover:text-paper rounded-full border px-4 py-1.5 text-sm transition-colors duration-300"
+              className="border-ink hover:bg-ink hover:text-paper rounded-full border px-4 py-1.5 text-[0.95rem] transition-colors duration-300"
             >
               {nav.cv}
             </a>

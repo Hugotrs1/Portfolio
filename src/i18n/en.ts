@@ -115,6 +115,13 @@ export const en: Dictionary = {
     stackLabel: 'Stack',
     achievementsLabel: 'What I built',
     webCaption: 'Web version: same Flutter code as mobile',
+    screens: {
+      hint: 'Select a screen to enlarge it',
+      open: 'Open screen',
+      close: 'Close',
+      previous: 'Previous screen',
+      next: 'Next screen',
+    },
     items: {
       garezvous: {
         title: 'GarezVous',
@@ -126,6 +133,7 @@ export const en: Dictionary = {
           'Added parking without an account, using only the licence plate.',
           'Redesigned both the look and the code of the app.',
         ],
+        screenTitles: ['Create a ticket', 'Home', 'Subscriptions'],
         screenAlts: [
           'Creating a parking ticket: choosing the zone on the map',
           'GarezVous home screen with access to parking without an account',

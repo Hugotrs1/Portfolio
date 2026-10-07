@@ -9,6 +9,7 @@ export type ProjectText = {
   description: string;
   role?: string;
   achievements?: string[];
+  screenTitles?: string[];
   screenAlts?: string[];
   webAlt?: string;
 };
@@ -59,6 +60,7 @@ export type Dictionary = {
     stackLabel: string;
     achievementsLabel: string;
     webCaption: string;
+    screens: { hint: string; open: string; close: string; previous: string; next: string };
     items: Record<ProjectId, ProjectText>;
   };
   skills: { levels: Record<SkillLevel, string> };

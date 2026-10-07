@@ -26,7 +26,7 @@ export function ProjectList({ projects, texts, start = 1 }: ProjectListProps) {
             <span className="ease-out-expo font-serif text-4xl leading-none transition-transform duration-700 group-hover:translate-x-3 sm:col-span-5 sm:text-5xl">
               {text.title}
             </span>
-            <span className="text-ink-soft text-sm leading-relaxed sm:col-span-4">
+            <span className="text-ink-soft text-base leading-relaxed sm:col-span-4">
               {text.description}
             </span>
             <span className="label text-muted flex items-center justify-between gap-2 sm:col-span-2 sm:justify-end">

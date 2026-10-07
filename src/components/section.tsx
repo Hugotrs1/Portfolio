@@ -30,7 +30,10 @@ export function Section({ id, index, label, title, intro, children }: SectionPro
               className="font-serif text-5xl leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl"
             />
             {intro ? (
-              <Reveal delay={0.15} className="text-ink-soft mt-6 max-w-xl text-lg leading-relaxed">
+              <Reveal
+                delay={0.15}
+                className="text-ink-soft mt-6 max-w-xl text-lg leading-relaxed sm:text-xl"
+              >
                 {intro}
               </Reveal>
             ) : null}

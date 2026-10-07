@@ -112,6 +112,13 @@ export const fr: Dictionary = {
     stackLabel: 'Stack',
     achievementsLabel: 'Réalisations',
     webCaption: 'Version web : même code Flutter que le mobile',
+    screens: {
+      hint: "Sélectionner un écran pour l'agrandir",
+      open: "Ouvrir l'écran",
+      close: 'Fermer',
+      previous: 'Écran précédent',
+      next: 'Écran suivant',
+    },
     items: {
       garezvous: {
         title: 'GarezVous',
@@ -123,6 +130,7 @@ export const fr: Dictionary = {
           "Ajout du stationnement sans compte, à partir de la seule plaque d'immatriculation.",
           "Refonte du design et du code de l'application.",
         ],
+        screenTitles: ['Créer un ticket', 'Accueil', 'Abonnements'],
         screenAlts: [
           "Création d'un ticket de stationnement : choix de la zone sur la carte",
           "Accueil de GarezVous avec l'accès au stationnement sans compte",

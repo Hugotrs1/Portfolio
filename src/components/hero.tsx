@@ -60,7 +60,10 @@ export function Hero({ hero }: { hero: Dictionary['hero'] }) {
 
         <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="space-y-8 lg:col-span-6">
-            <motion.p {...fadeIn(0.6)} className="text-ink-soft max-w-lg text-lg leading-relaxed">
+            <motion.p
+              {...fadeIn(0.6)}
+              className="text-ink-soft max-w-lg text-lg leading-relaxed sm:text-xl"
+            >
               <span className="text-ink">
                 {hero.role} — {hero.stack}.
               </span>{' '}
@@ -70,12 +73,12 @@ export function Hero({ hero }: { hero: Dictionary['hero'] }) {
             <motion.div {...fadeIn(0.75)} className="flex flex-wrap items-center gap-x-6 gap-y-4">
               <a
                 href="#projets"
-                className="group bg-ink text-paper hover:bg-accent inline-flex items-center gap-3 rounded-full px-6 py-3 text-sm transition-colors duration-300"
+                className="group bg-ink text-paper hover:bg-accent inline-flex items-center gap-3 rounded-full px-6 py-3 text-base transition-colors duration-300"
               >
                 {hero.cta}
                 <ArrowDown className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-y-0.5" />
               </a>
-              <a href={`mailto:${person.email}`} className="link-underline text-sm">
+              <a href={`mailto:${person.email}`} className="link-underline text-base">
                 {person.email}
               </a>
             </motion.div>

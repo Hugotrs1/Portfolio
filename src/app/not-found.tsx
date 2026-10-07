@@ -26,7 +26,7 @@ export default function NotFound() {
         <div className="border-line mt-12 grid gap-10 border-t pt-8 sm:grid-cols-2">
           <div>
             <p className="font-serif text-3xl sm:text-4xl">Cette page n&apos;existe pas.</p>
-            <Link href="/" className="group mt-6 inline-flex items-center gap-2 text-sm">
+            <Link href="/" className="group mt-6 inline-flex items-center gap-2 text-base">
               <span className="link-underline">Retour à l&apos;accueil</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
@@ -35,7 +35,7 @@ export default function NotFound() {
             <p className="text-ink-soft font-serif text-3xl sm:text-4xl">
               This page doesn&apos;t exist.
             </p>
-            <Link href="/en/" className="group mt-6 inline-flex items-center gap-2 text-sm">
+            <Link href="/en/" className="group mt-6 inline-flex items-center gap-2 text-base">
               <span className="link-underline">Back to the homepage</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>

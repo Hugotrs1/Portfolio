@@ -114,7 +114,7 @@ export function ContactForm({ t }: { t: Dictionary['contact']['form'] }) {
         <button
           type="submit"
           disabled={sending}
-          className="group bg-paper text-ink hover:bg-accent hover:text-paper inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-sm transition-colors duration-300 disabled:opacity-60"
+          className="group bg-paper text-ink hover:bg-accent hover:text-paper inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-base transition-colors duration-300 disabled:opacity-60"
         >
           {sending ? t.sending : t.send}
           <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -128,7 +128,7 @@ export function ContactForm({ t }: { t: Dictionary['contact']['form'] }) {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className={`text-sm ${feedback.kind === 'error' ? 'text-[#f0a58a]' : 'text-paper'}`}
+              className={`text-base ${feedback.kind === 'error' ? 'text-[#f0a58a]' : 'text-paper'}`}
             >
               {feedback.message}
             </motion.p>

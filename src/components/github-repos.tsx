@@ -94,7 +94,7 @@ export function GithubRepos({ t }: { t: Dictionary['github'] }) {
                   className="group hover:bg-paper-deep/60 grid items-baseline gap-2 py-6 transition-colors duration-300 sm:grid-cols-12 sm:gap-8 sm:px-3"
                 >
                   <span className="font-mono text-base sm:col-span-4">{repo.name}</span>
-                  <span className="text-ink-soft text-sm sm:col-span-5">{repo.description}</span>
+                  <span className="text-ink-soft text-base sm:col-span-5">{repo.description}</span>
                   <span className="label text-muted flex items-center justify-between gap-4 sm:col-span-3 sm:justify-end">
                     <span>
                       {[
@@ -116,7 +116,7 @@ export function GithubRepos({ t }: { t: Dictionary['github'] }) {
         href={person.github}
         target="_blank"
         rel="noreferrer noopener"
-        className="link-underline mt-8 inline-flex items-center gap-2 text-sm"
+        className="link-underline mt-8 inline-flex items-center gap-2 text-base"
       >
         {t.all}
         <ArrowUpRight />
