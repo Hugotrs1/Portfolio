@@ -3,10 +3,10 @@ import type { Dictionary } from './types';
 export const en: Dictionary = {
   locale: 'en',
   meta: {
-    title: 'Hugo Troussel — Software Developer (Flutter & Java)',
+    title: 'Hugo Troussel — Software Developer',
     description:
       'Portfolio of Hugo Troussel, work-study software developer at Agelid. Redesign of GarezVous (Flutter), projects and GitHub repositories.',
-    ogDescription: 'Work-study software developer — Flutter & Java.',
+    ogDescription: 'Work-study software developer at Agelid.',
   },
   nav: {
     label: 'Main navigation',
@@ -30,8 +30,7 @@ export const en: Dictionary = {
     status: 'Work-study at Agelid',
     location: 'Normandy, France',
     school: "Bachelor's at CESI Rouen",
-    role: 'Software developer',
-    stack: 'Flutter & Java',
+    role: 'Work-study software developer',
     introduction:
       "I work on GarezVous, Agelid's parking app, on mobile and web with Flutter. I led its redesign and added parking with and without an account. I care as much about polishing an interface as about understanding the business behind it.",
     highlights: [
@@ -49,7 +48,8 @@ export const en: Dictionary = {
     projects: {
       label: 'Projects',
       title: 'Selected work.',
-      intro: 'One professional project in production, and projects built during my studies.',
+      intro:
+        'One professional project in production, one school project, and tools I built for my own use.',
     },
     skills: {
       label: 'Skills',
@@ -147,15 +147,20 @@ export const en: Dictionary = {
         description:
           'Flutter messaging app backed by a PHP API written without a framework: token authentication, conversations, friend requests and profiles.',
       },
-      videGrenier: {
-        title: 'Vide Grenier en ligne',
+      jarvis: {
+        title: 'Jarvis',
         description:
-          'Second-hand classifieds website in PHP (MVC), containerised with Docker across three environments (dev, staging, prod) and tested with PHPUnit.',
+          'Personal assistant Discord bot: natural-language reminders, to-do list, morning briefing, budget and price tracking, website and machine monitoring.',
       },
-      apiValorant: {
-        title: 'Valorant API',
+      readLater: {
+        title: 'Read later',
         description:
-          'API serving information about Valorant agents, consumed by a browsing front end.',
+          "Chrome and Edge extension: right-click a page or a link to send it to a Discord channel, with a note. Everything sent feeds Jarvis's reading list.",
+      },
+      downloads: {
+        title: 'Downloads organizer',
+        description:
+          'Script that tidies the Downloads folder by rules (extension, name, size), continuously, with undo, duplicate handling and clean-up of old files.',
       },
     },
   },

@@ -1,4 +1,4 @@
-export type ProjectId = 'garezvous' | 'whatsapp' | 'videGrenier' | 'apiValorant';
+export type ProjectId = 'garezvous' | 'whatsapp' | 'jarvis' | 'readLater' | 'downloads';
 
 export type NowId = 'ai' | 'code' | 'games';
 
@@ -17,7 +17,7 @@ export type ExternalLink = {
 
 export type Project = {
   id: ProjectId;
-  kind: 'pro' | 'cours';
+  kind: 'pro' | 'cours' | 'perso';
   tags: string[];
   links: ExternalLink[];
   cover?: string;

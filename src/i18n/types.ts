@@ -34,7 +34,6 @@ export type Dictionary = {
     location: string;
     school: string;
     role: string;
-    stack: string;
     introduction: string;
     highlights: { term: string; detail: string }[];
     cta: string;

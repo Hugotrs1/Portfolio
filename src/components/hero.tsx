@@ -65,10 +65,7 @@ export function Hero({ hero }: { hero: Dictionary['hero'] }) {
               {...fadeIn(0.6)}
               className="text-ink-soft max-w-lg text-lg leading-relaxed sm:text-xl"
             >
-              <span className="text-ink">
-                {hero.role} — {hero.stack}.
-              </span>{' '}
-              {hero.introduction}
+              <span className="text-ink">{hero.role}.</span> {hero.introduction}
             </motion.p>
 
             <motion.div {...fadeIn(0.75)} className="flex flex-wrap items-center gap-x-6 gap-y-4">

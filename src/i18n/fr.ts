@@ -3,10 +3,10 @@ import type { Dictionary } from './types';
 export const fr: Dictionary = {
   locale: 'fr',
   meta: {
-    title: 'Hugo Troussel — Développeur informatique (Flutter & Java)',
+    title: 'Hugo Troussel — Développeur informatique',
     description:
       'Portfolio de Hugo Troussel, développeur informatique en alternance chez Agelid. Refonte de GarezVous (Flutter), projets et dépôts GitHub.',
-    ogDescription: 'Développeur informatique en alternance — Flutter & Java.',
+    ogDescription: 'Développeur informatique en alternance chez Agelid.',
   },
   nav: {
     label: 'Navigation principale',
@@ -30,8 +30,7 @@ export const fr: Dictionary = {
     status: 'En alternance chez Agelid',
     location: 'Normandie, France',
     school: 'Bachelor CESI Rouen',
-    role: 'Développeur informatique',
-    stack: 'Flutter & Java',
+    role: 'Développeur informatique en alternance',
     introduction:
       "Je travaille sur GarezVous, l'application de stationnement d'Agelid, sur mobile et sur web en Flutter. J'ai mené sa refonte et ajouté le stationnement avec et sans compte. J'aime autant soigner une interface que comprendre le métier qui se cache derrière.",
     highlights: [
@@ -46,7 +45,8 @@ export const fr: Dictionary = {
     projects: {
       label: 'Projets',
       title: 'Travaux choisis.',
-      intro: 'Un projet professionnel en production, et des projets réalisés en formation.',
+      intro:
+        'Un projet professionnel en production, un projet de formation, et des outils que je me suis codés pour mon usage perso.',
     },
     skills: {
       label: 'Compétences',
@@ -144,15 +144,20 @@ export const fr: Dictionary = {
         description:
           "Messagerie mobile en Flutter adossée à une API PHP écrite sans framework : authentification par jeton, conversations, demandes d'amis et profils.",
       },
-      videGrenier: {
-        title: 'Vide Grenier en ligne',
+      jarvis: {
+        title: 'Jarvis',
         description:
-          'Site de petites annonces de seconde main en PHP (MVC), conteneurisé avec Docker sur trois environnements (dev, recette, prod) et testé avec PHPUnit.',
+          "Bot Discord d'assistance personnelle : rappels en langage naturel, to-do list, briefing du matin, suivi du budget et des prix, monitoring de sites et de la machine.",
       },
-      apiValorant: {
-        title: 'API Valorant',
+      readLater: {
+        title: 'À lire plus tard',
         description:
-          'API exposant les informations des agents du jeu Valorant, consommée par un front-end de consultation.',
+          "Extension Chrome et Edge : un clic droit sur une page ou un lien l'envoie dans un salon Discord, avec une note. Les envois alimentent la liste de lecture de Jarvis.",
+      },
+      downloads: {
+        title: 'Rangement des téléchargements',
+        description:
+          'Script qui range le dossier Téléchargements selon des règles (extension, nom, taille), en continu, avec annulation, gestion des doublons et nettoyage des vieux fichiers.',
       },
     },
   },

@@ -18,7 +18,7 @@ import { Section } from './section';
 import { Skills } from './skills';
 
 const featured = projects.filter((project) => project.kind === 'pro');
-const coursework = projects.filter((project) => project.kind === 'cours');
+const others = projects.filter((project) => project.kind !== 'pro');
 
 export function HomePage({ dict }: { dict: Dictionary }) {
   const { sections } = dict;
@@ -48,7 +48,7 @@ export function HomePage({ dict }: { dict: Dictionary }) {
               />
             ))}
             <ProjectList
-              projects={coursework}
+              projects={others}
               texts={dict.projects.items}
               start={featured.length + 1}
             />
