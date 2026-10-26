@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { person } from '@/data/profile';
 
 import { Container } from './container';
+import { ArrowLeft } from './icons';
 import { easeOutExpo } from './reveal';
 
 const letter = {
@@ -24,6 +25,13 @@ export function Footer({ backToTop }: { backToTop: string }) {
             © {new Date().getFullYear()} {person.name}
           </p>
           <p>Next.js · TypeScript · Tailwind CSS · Framer Motion</p>
+          <a
+            href="https://hugotrs.fr"
+            className="group text-paper inline-flex items-center gap-2 self-start sm:self-auto"
+          >
+            <ArrowLeft className="h-3 w-3 transition-transform duration-500 group-hover:-translate-x-1" />
+            <span className="link-underline">hugotrs.fr</span>
+          </a>
           <a href="#top" className="link-underline text-paper self-start sm:self-auto">
             {backToTop}
           </a>

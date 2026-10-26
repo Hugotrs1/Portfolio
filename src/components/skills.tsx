@@ -5,7 +5,6 @@ import Image from 'next/image';
 
 import { skillLevels, skills } from '@/data/skills';
 import type { Dictionary } from '@/i18n';
-import { asset } from '@/lib/base-path';
 
 import { easeOutExpo, Reveal } from './reveal';
 
@@ -57,7 +56,7 @@ export function Skills({ levels }: { levels: Dictionary['skills']['levels'] }) {
               {items.map((skill) => (
                 <li key={skill.name} className="group flex items-center gap-3">
                   <Image
-                    src={asset(skill.icon)}
+                    src={skill.icon}
                     alt=""
                     width={32}
                     height={32}

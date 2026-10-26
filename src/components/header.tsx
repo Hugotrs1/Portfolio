@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import { person } from '@/data/profile';
 import type { Dictionary } from '@/i18n';
-import { asset } from '@/lib/base-path';
 
 import { Container } from './container';
 import { LanguageSwitch } from './language-switch';
@@ -90,7 +89,7 @@ export function Header({ nav }: { nav: Dictionary['nav'] }) {
             {languageSwitch}
             <Magnetic>
               <a
-                href={asset(person.cvPath)}
+                href={person.cvPath}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="border-ink hover:bg-ink hover:text-paper rounded-full border px-4 py-1.5 text-[0.95rem] transition-colors duration-300"
@@ -127,7 +126,7 @@ export function Header({ nav }: { nav: Dictionary['nav'] }) {
           >
             <Container>
               <nav aria-label={nav.mobileLabel} className="border-line flex flex-col border-t">
-                {[...nav.items, { label: nav.cv, href: asset(person.cvPath) }].map(
+                {[...nav.items, { label: nav.cv, href: person.cvPath }].map(
                   (item, index) => (
                     <motion.a
                       key={item.href}

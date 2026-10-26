@@ -3,7 +3,7 @@ import type { Dictionary } from './types';
 export const en: Dictionary = {
   locale: 'en',
   meta: {
-    title: 'Hugo Troussel — Software Developer',
+    title: 'Hugo Troussel | Software Developer',
     description:
       'Portfolio of Hugo Troussel, work-study software developer at Agelid. Redesign of GarezVous (Flutter), projects and GitHub repositories.',
     ogDescription: 'Work-study software developer at Agelid.',
@@ -77,7 +77,7 @@ export const en: Dictionary = {
       {
         company: 'Agelid',
         role: 'Work-study software developer',
-        period: 'Oct 2025 — present',
+        period: 'Oct 2025 - present',
         details:
           'Redesign of GarezVous, the on-street parking app offered to client local authorities. I added parking with and without an account, and reworked both the design and the code of the app, on mobile and web.',
         technologies: ['Flutter', 'Dart', 'Java', 'JSP'],
@@ -86,7 +86,7 @@ export const en: Dictionary = {
       {
         company: 'Agelid',
         role: 'Mobile development internship',
-        period: 'Mar — Jun 2025',
+        period: 'Mar - Jun 2025',
         details:
           'Built a proof of concept (POC): a parking feature integrated into an existing mobile app, using simulated data.',
         technologies: ['Flutter', 'Dart', 'Java'],
@@ -96,12 +96,12 @@ export const en: Dictionary = {
       {
         title: "Bachelor's in Application Design & Development (Bac+3), work-study",
         school: 'CESI Rouen',
-        year: '2026 — 2027',
+        year: '2026 - 2027',
       },
       {
         title: 'Software Developer certification (Bac+2), completed',
         school: 'CESI Rouen',
-        year: '2024 — 2026',
+        year: '2024 - 2026',
       },
       {
         title: 'French Baccalaureate, Mathematics & Computer Science majors',
@@ -111,7 +111,7 @@ export const en: Dictionary = {
     ],
   },
   projects: {
-    featuredLabel: 'Professional project — in production',
+    featuredLabel: 'Professional project · in production',
     roleLabel: 'Role',
     stackLabel: 'Stack',
     achievementsLabel: 'What I built',

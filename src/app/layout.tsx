@@ -14,7 +14,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hugotrs1.github.io/Portfolio/'),
+  metadataBase: new URL('https://portfolio.hugotrs.fr/'),
   title: 'Hugo Troussel',
 };
 

@@ -3,7 +3,7 @@ import type { Dictionary } from './types';
 export const fr: Dictionary = {
   locale: 'fr',
   meta: {
-    title: 'Hugo Troussel — Développeur informatique',
+    title: 'Hugo Troussel | Développeur informatique',
     description:
       'Portfolio de Hugo Troussel, développeur informatique en alternance chez Agelid. Refonte de GarezVous (Flutter), projets et dépôts GitHub.',
     ogDescription: 'Développeur informatique en alternance chez Agelid.',
@@ -74,7 +74,7 @@ export const fr: Dictionary = {
       {
         company: 'Agelid',
         role: 'Développeur en alternance',
-        period: "Oct. 2025 — aujourd'hui",
+        period: "Oct. 2025 - aujourd'hui",
         details:
           "Refonte de GarezVous, l'application de stationnement ponctuel proposée aux collectivités clientes. J'y ai ajouté le stationnement avec compte et sans compte, et repris le design comme le code de l'application, sur mobile et sur web.",
         technologies: ['Flutter', 'Dart', 'Java', 'JSP'],
@@ -83,7 +83,7 @@ export const fr: Dictionary = {
       {
         company: 'Agelid',
         role: 'Stage développement mobile',
-        period: 'Mars — Juin 2025',
+        period: 'Mars - Juin 2025',
         details:
           "Réalisation d'un POC (proof of concept) : intégration d'une fonctionnalité de stationnement dans une application mobile existante, à partir de données simulées.",
         technologies: ['Flutter', 'Dart', 'Java'],
@@ -93,12 +93,12 @@ export const fr: Dictionary = {
       {
         title: "Bachelor Concepteur Développeur d'Applications (Bac+3), en alternance",
         school: 'CESI Rouen',
-        year: '2026 — 2027',
+        year: '2026 - 2027',
       },
       {
         title: 'Titre Développeur Informatique (Bac+2), obtenu',
         school: 'CESI Rouen',
-        year: '2024 — 2026',
+        year: '2024 - 2026',
       },
       {
         title: 'Baccalauréat général, spécialités Mathématiques & NSI',
@@ -108,7 +108,7 @@ export const fr: Dictionary = {
     ],
   },
   projects: {
-    featuredLabel: 'Projet professionnel — en production',
+    featuredLabel: 'Projet professionnel · en production',
     roleLabel: 'Rôle',
     stackLabel: 'Stack',
     achievementsLabel: 'Réalisations',

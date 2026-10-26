@@ -22,7 +22,7 @@ export function Profile({ profile }: { profile: Dictionary['profile'] }) {
             current={item.current ? profile.current : undefined}
           >
             <h4 className="text-xl">
-              {item.role} <span className="text-muted">— {item.company}</span>
+              {item.role} <span className="text-muted">· {item.company}</span>
             </h4>
             <p className="text-ink-soft mt-2 max-w-2xl leading-relaxed">{item.details}</p>
             <p className="label text-muted mt-4">{item.technologies.join(' · ')}</p>

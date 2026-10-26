@@ -4,7 +4,6 @@ import { AnimatePresence, motion, useScroll, useTransform, type MotionValue } fr
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 
-import { asset } from '@/lib/base-path';
 import type { Dictionary, ProjectText } from '@/i18n/types';
 import type { Project } from '@/types';
 
@@ -87,7 +86,7 @@ export function FeaturedProject({ project, text, labels }: FeaturedProjectProps)
           {project.cover ? (
             <motion.div style={{ y: coverY }} className="absolute inset-[-10%_0] opacity-40">
               <Image
-                src={asset(project.cover)}
+                src={project.cover}
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 66vw, 100vw"
@@ -143,7 +142,7 @@ export function FeaturedProject({ project, text, labels }: FeaturedProjectProps)
               <figure>
                 <BrowserFrame url="garezvous.fr">
                   <Image
-                    src={asset(project.webScreen)}
+                    src={project.webScreen}
                     alt={text.webAlt ?? ''}
                     width={1600}
                     height={757}
@@ -205,7 +204,7 @@ function Phone({ screen, openLabel, hidden, onOpen, frameRef, y, className }: Ph
           className={`ease-out-expo relative rounded-[1.6rem] bg-[#0b0b0a] p-1.5 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10 transition duration-700 group-hover:-translate-y-3 group-hover:ring-white/40 ${hidden ? 'invisible' : ''}`}
         >
           <Image
-            src={asset(screen.src)}
+            src={screen.src}
             alt={screen.alt}
             width={600}
             height={1300}

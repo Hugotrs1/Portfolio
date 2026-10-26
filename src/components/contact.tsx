@@ -1,6 +1,5 @@
 import { person } from '@/data/profile';
 import type { Dictionary } from '@/i18n';
-import { asset } from '@/lib/base-path';
 
 import { ContactForm } from './contact-form';
 import { CopyEmail } from './copy-email';
@@ -13,7 +12,7 @@ export function Contact({ contact }: { contact: Dictionary['contact'] }) {
   const links = [
     { label: 'GitHub', href: person.github },
     { label: 'LinkedIn', href: person.linkedin },
-    { label: contact.cvLabel, href: asset(person.cvPath) },
+    { label: contact.cvLabel, href: person.cvPath },
   ];
 
   return (

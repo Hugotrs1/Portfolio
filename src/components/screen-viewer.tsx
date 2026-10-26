@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useEffect, useLayoutEffect, useState } from 'react';
 
 import type { Dictionary } from '@/i18n/types';
-import { asset } from '@/lib/base-path';
 
 import { ArrowLeft, ArrowRight, Close } from './icons';
 import { Magnetic } from './magnetic';
@@ -144,7 +143,7 @@ export function ScreenViewer({
       ref={scope}
       role="dialog"
       aria-modal="true"
-      aria-label={`${project} — ${screen.title}`}
+      aria-label={`${project} · ${screen.title}`}
       data-lenis-prevent
       className="fixed inset-0 z-[100]"
     >
@@ -196,7 +195,7 @@ export function ScreenViewer({
                 className="absolute inset-0 cursor-grab active:cursor-grabbing"
               >
                 <Image
-                  src={asset(screen.src)}
+                  src={screen.src}
                   alt={screen.alt}
                   fill
                   draggable={false}
@@ -219,7 +218,7 @@ export function ScreenViewer({
             <span className="text-accent">{String(index + 1).padStart(2, '0')}</span>
             <span className="mx-2">/</span>
             {String(screens.length).padStart(2, '0')}
-            <span className="mx-2">—</span>
+            <span className="mx-2">·</span>
             {project}
           </p>
           <div aria-live="polite">

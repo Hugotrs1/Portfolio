@@ -5,7 +5,6 @@ import Image from 'next/image';
 
 import { nowItems } from '@/data/now';
 import type { Dictionary } from '@/i18n';
-import { asset } from '@/lib/base-path';
 
 import { easeOutExpo, Reveal } from './reveal';
 
@@ -44,7 +43,7 @@ export function Now({ texts }: { texts: Dictionary['now'] }) {
           >
             <motion.div custom={index} variants={zoom} className="absolute inset-0">
               <Image
-                src={asset(item.image)}
+                src={item.image}
                 alt={texts[item.id].alt}
                 fill
                 sizes="(min-width: 768px) 33vw, 100vw"

@@ -5,7 +5,7 @@ import { Container } from '@/components/container';
 import { ArrowUpRight } from '@/components/icons';
 
 export const metadata: Metadata = {
-  title: 'Page introuvable — Hugo Troussel',
+  title: 'Page introuvable | Hugo Troussel',
   robots: { index: false },
 };
 
