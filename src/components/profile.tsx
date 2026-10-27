@@ -85,7 +85,7 @@ function Row({
       <Reveal className="grid gap-3 sm:grid-cols-9 sm:gap-8">
         <p className="label text-muted pt-1.5 sm:col-span-3">
           {period}
-          {current ? <span className="text-accent ml-3">{current}</span> : null}
+          {current ? <span className="text-accent ml-3 whitespace-nowrap">{current}</span> : null}
         </p>
         <div className="sm:col-span-6">{children}</div>
       </Reveal>
