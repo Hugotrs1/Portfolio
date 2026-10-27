@@ -49,7 +49,7 @@ export const en: Dictionary = {
       label: 'Projects',
       title: 'Selected work.',
       intro:
-        'One professional project in production, one school project, and tools I built for my own use.',
+        'One professional project in production, school projects, and tools I built for my own use.',
     },
     skills: {
       label: 'Skills',
@@ -146,6 +146,11 @@ export const en: Dictionary = {
         title: 'WhatsApp clone',
         description:
           'Flutter messaging app backed by a PHP API written without a framework: token authentication, conversations, friend requests and profiles.',
+      },
+      pixelPunch: {
+        title: 'Pixel Punch',
+        description:
+          'Pixel art boxing game in object-oriented Python with Pygame: against a three-level AI or two players on one keyboard. A school project, ported to the browser with WebAssembly and playable online.',
       },
       jarvis: {
         title: 'Jarvis',

@@ -1,4 +1,4 @@
-export type ProjectId = 'garezvous' | 'whatsapp' | 'jarvis' | 'readLater' | 'downloads';
+export type ProjectId = 'garezvous' | 'whatsapp' | 'pixelPunch' | 'jarvis' | 'readLater' | 'downloads';
 
 export type NowId = 'ai' | 'code' | 'games';
 

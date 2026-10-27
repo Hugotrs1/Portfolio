@@ -28,6 +28,15 @@ export const projects: Project[] = [
     links: [{ label: 'GitHub', url: 'https://github.com/Hugotrs1/WhatsApp' }],
   },
   {
+    id: 'pixelPunch',
+    kind: 'cours',
+    tags: ['Python', 'Pygame', 'WebAssembly'],
+    links: [
+      { label: 'Jouer', url: 'https://jeu.hugotrs.fr' },
+      { label: 'GitHub', url: 'https://github.com/Hugotrs1/Pixel-Punch' },
+    ],
+  },
+  {
     id: 'jarvis',
     kind: 'perso',
     tags: ['Python', 'discord.py', 'SQLite', 'Docker'],

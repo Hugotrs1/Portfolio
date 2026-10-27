@@ -46,7 +46,7 @@ export const fr: Dictionary = {
       label: 'Projets',
       title: 'Travaux choisis.',
       intro:
-        'Un projet professionnel en production, un projet de formation, et des outils que je me suis codés pour mon usage perso.',
+        'Un projet professionnel en production, des projets de formation, et des outils que je me suis codés pour mon usage perso.',
     },
     skills: {
       label: 'Compétences',
@@ -143,6 +143,11 @@ export const fr: Dictionary = {
         title: 'Clone de WhatsApp',
         description:
           "Messagerie mobile en Flutter adossée à une API PHP écrite sans framework : authentification par jeton, conversations, demandes d'amis et profils.",
+      },
+      pixelPunch: {
+        title: 'Pixel Punch',
+        description:
+          "Jeu de boxe en pixel art, en Python orienté objet avec Pygame : contre une IA à trois niveaux ou à deux sur le même clavier. Projet de NSI, porté dans le navigateur en WebAssembly et jouable en ligne.",
       },
       jarvis: {
         title: 'Jarvis',
