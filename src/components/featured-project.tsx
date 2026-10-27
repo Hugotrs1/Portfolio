@@ -207,9 +207,9 @@ function Phone({ screen, openLabel, hidden, onOpen, frameRef, y, className }: Ph
             src={screen.src}
             alt={screen.alt}
             width={600}
-            height={1300}
+            height={1237}
             sizes="(min-width: 1024px) 240px, 30vw"
-            className="aspect-[6/13] w-full rounded-[1.25rem] object-cover object-top"
+            className="aspect-[600/1237] w-full rounded-[1.25rem] object-cover object-top"
           />
           <span className="label bg-paper text-ink ease-out-expo absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-2 rounded-full px-3 py-1.5 whitespace-nowrap opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 max-sm:hidden">
             {screen.title}

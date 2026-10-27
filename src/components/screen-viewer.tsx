@@ -173,7 +173,7 @@ export function ScreenViewer({
       <div className="pointer-events-none relative flex h-full flex-col items-center justify-center gap-8 px-6 py-20 lg:flex-row lg:gap-20">
         <div
           data-frame
-          className="pointer-events-auto relative aspect-[6/13] h-[min(62svh,40rem)] shrink-0 rounded-[2.2rem] bg-[#0b0b0a] p-2 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.9)] ring-1 ring-white/10 lg:h-[min(80svh,46rem)]"
+          className="pointer-events-auto relative aspect-[600/1237] h-[min(62svh,40rem)] shrink-0 rounded-[2.2rem] bg-[#0b0b0a] p-2 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.9)] ring-1 ring-white/10 lg:h-[min(80svh,46rem)]"
         >
           <div className="relative h-full w-full overflow-hidden rounded-[1.8rem] bg-[#0b0b0a]">
             <AnimatePresence initial={false} custom={direction}>
