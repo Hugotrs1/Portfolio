@@ -53,7 +53,7 @@ export function BrowserFrame({ url, children }: { url: string; children: ReactNo
         style={{ rotateX, rotateY }}
         onPointerMove={onPointerMove}
         onPointerLeave={reset}
-        className="ring-line overflow-hidden rounded-lg bg-[#e3ddd0] shadow-[0_40px_80px_-40px_rgba(0,0,0,0.45)] ring-1"
+        className="ring-line overflow-hidden rounded-lg bg-[#e6e8ee] shadow-[0_40px_80px_-40px_rgba(0,0,0,0.45)] ring-1"
       >
         <div className="flex items-center gap-1.5 px-4 py-3" aria-hidden>
           <span className="bg-ink/15 h-2.5 w-2.5 rounded-full" />

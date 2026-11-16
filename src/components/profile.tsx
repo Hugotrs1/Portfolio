@@ -76,8 +76,8 @@ function Row({
     <li className="border-line relative border-t py-7 pl-8 last:border-b sm:pl-10">
       <motion.span
         aria-hidden
-        initial={{ scale: 1, backgroundColor: '#f2eee6', borderColor: '#cfc9bf' }}
-        whileInView={{ scale: [1, 1.6, 1.2], backgroundColor: '#c4471f', borderColor: '#c4471f' }}
+        initial={{ scale: 1, backgroundColor: '#f2f3f6', borderColor: '#a9b0c6' }}
+        whileInView={{ scale: [1, 1.6, 1.2], backgroundColor: '#2e5bff', borderColor: '#2e5bff' }}
         viewport={{ margin: '0px 0px -35% 0px' }}
         transition={{ duration: 0.6, ease: easeOutExpo }}
         className="absolute top-[2.2rem] -left-[4.5px] h-2.5 w-2.5 rounded-full border"
