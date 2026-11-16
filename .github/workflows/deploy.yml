@@ -20,15 +20,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Build (export statique)
-        run: |
-          for name in NEXT_PUBLIC_EMAILJS_PUBLIC_KEY NEXT_PUBLIC_EMAILJS_SERVICE_ID NEXT_PUBLIC_EMAILJS_TEMPLATE_ID; do
-            [ -n "${!name}" ] || { echo "::error::Secret GitHub manquant : $name"; exit 1; }
-          done
-          npm run build
-        env:
-          NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
-          NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
-          NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
+        run: npm run build
       - name: Envoi sur portfolio.hugotrs.fr
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}

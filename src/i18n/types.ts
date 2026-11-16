@@ -80,19 +80,6 @@ export type Dictionary = {
     cvLabel: string;
     copy: string;
     copied: string;
-    form: {
-      name: string;
-      email: string;
-      message: string;
-      send: string;
-      sending: string;
-      sent: string;
-      hint: string;
-      missing: string;
-      invalidEmail: string;
-      error: string;
-      success: string;
-    };
   };
   footer: { backToTop: string };
 };

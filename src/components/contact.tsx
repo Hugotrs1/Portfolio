@@ -1,7 +1,6 @@
 import { person } from '@/data/profile';
 import type { Dictionary } from '@/i18n';
 
-import { ContactForm } from './contact-form';
 import { CopyEmail } from './copy-email';
 import { Container } from './container';
 import { ArrowUpRight } from './icons';
@@ -62,10 +61,6 @@ export function Contact({ contact }: { contact: Dictionary['contact'] }) {
                 </li>
               ))}
             </ul>
-          </Reveal>
-
-          <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
-            <ContactForm t={contact.form} />
           </Reveal>
         </div>
       </Container>
