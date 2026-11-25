@@ -170,14 +170,17 @@ export const fr: Dictionary = {
     ai: {
       title: 'IA & nouvelles technos',
       body: "Je suis de près l'évolution de l'IA et des technologies émergentes, et je teste ce qui peut améliorer ma façon de développer.",
+      alt: 'Réseau de filaments lumineux évoquant un réseau de neurones',
     },
     code: {
       title: 'Approfondir Flutter & Java',
       body: "Je continue de monter en compétence sur les langages que j'utilise au quotidien, côté mobile comme côté back-office.",
+      alt: 'Ordinateur portable affichant du code dans un éditeur',
     },
     games: {
       title: 'Jeux vidéo',
       body: "En dehors du code, je joue aussi bien à des jeux compétitifs qu'à des jeux solo, pour le challenge comme pour l'histoire.",
+      alt: 'Manette de jeu rétroéclairée',
     },
   },
   github: {

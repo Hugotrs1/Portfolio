@@ -12,6 +12,7 @@ export type SkillLevel = 'advanced' | 'intermediate' | 'beginner';
 
 export type Skill = {
   name: string;
+  icon: string;
   level: SkillLevel;
 };
 
@@ -27,4 +28,9 @@ export type Project = {
   links: ExternalLink[];
   screens?: string[];
   webScreen?: string;
+};
+
+export type NowItem = {
+  id: NowId;
+  image: string;
 };

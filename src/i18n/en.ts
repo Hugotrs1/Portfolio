@@ -173,14 +173,17 @@ export const en: Dictionary = {
     ai: {
       title: 'AI & emerging tech',
       body: 'I closely follow how AI and emerging technologies evolve, and I try out whatever can improve the way I build software.',
+      alt: 'Glowing filaments evoking a neural network',
     },
     code: {
       title: 'Going deeper with Flutter & Java',
       body: 'I keep leveling up on the languages I use every day, on mobile as well as on the back office.',
+      alt: 'Laptop showing code in an editor',
     },
     games: {
       title: 'Video games',
       body: 'Away from code, I play both competitive and single-player games, for the challenge as much as for the story.',
+      alt: 'Backlit game controller',
     },
   },
   github: {

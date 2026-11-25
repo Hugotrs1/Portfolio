@@ -61,7 +61,7 @@ export type Dictionary = {
     items: Record<ProjectId, ProjectText>;
   };
   skills: { levels: Record<SkillLevel, string> };
-  now: Record<NowId, { title: string; body: string }>;
+  now: Record<NowId, { title: string; body: string; alt: string }>;
   github: {
     unavailable: string;
     all: string;
