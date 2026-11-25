@@ -2,58 +2,44 @@ import type { ProjectText } from '@/i18n/types';
 import type { Project, ProjectId } from '@/types';
 
 import { ArrowUpRight } from './icons';
-import { Reveal } from './reveal';
 
 type ProjectListProps = {
   projects: Project[];
   texts: Record<ProjectId, ProjectText>;
-  start?: number;
 };
 
-const rowClass = 'grid items-baseline gap-3 py-8 sm:grid-cols-12 sm:gap-8';
-
-export function ProjectList({ projects, texts, start = 1 }: ProjectListProps) {
+export function ProjectList({ projects, texts }: ProjectListProps) {
   return (
     <ul>
-      {projects.map((project, index) => {
+      {projects.map((project) => {
         const text = texts[project.id];
-        const url = project.links[0]?.url;
-        const content = (
-          <>
-            <span className="label text-muted sm:col-span-1">
-              {String(start + index).padStart(2, '0')}
-            </span>
-            <span className="ease-out-expo font-serif text-4xl leading-none transition-transform duration-700 group-hover:translate-x-3 sm:col-span-5 sm:text-5xl">
-              {text.title}
-            </span>
-            <span className="text-ink-soft text-base leading-relaxed sm:col-span-4">
-              {text.description}
-            </span>
-            <span className="label text-muted flex items-center justify-between gap-2 sm:col-span-2 sm:justify-end">
-              {project.tags.join(' · ')}
-              {url ? (
-                <ArrowUpRight className="text-ink group-hover:text-accent h-4 w-4 shrink-0 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
-              ) : null}
-            </span>
-          </>
-        );
 
         return (
-          <li key={project.id} className="border-line border-t last:border-b">
-            <Reveal delay={index * 0.08}>
-              {url ? (
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className={`group hover:text-accent transition-colors duration-500 ${rowClass}`}
-                >
-                  {content}
-                </a>
-              ) : (
-                <div className={rowClass}>{content}</div>
-              )}
-            </Reveal>
+          <li
+            key={project.id}
+            className="border-line grid gap-x-8 gap-y-3 border-t py-8 last:border-b lg:grid-cols-12"
+          >
+            <h3 className="text-2xl leading-8 lg:col-span-4">{text.title}</h3>
+            <div className="lg:col-span-6">
+              <p className="text-ink-soft max-w-2xl leading-[1.6]">{text.description}</p>
+              <p className="label text-muted mt-2">{project.tags.join(', ')}</p>
+            </div>
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 lg:col-span-2 lg:flex-col lg:items-end">
+              {project.links.map((link) => (
+                <li key={link.url}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={`${link.label} : ${text.title}`}
+                    className="hover:text-accent inline-flex items-center gap-2 transition-colors duration-150"
+                  >
+                    <span className="link-underline">{link.label}</span>
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </li>
         );
       })}

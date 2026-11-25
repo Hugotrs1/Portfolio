@@ -1,4 +1,10 @@
-export type ProjectId = 'garezvous' | 'whatsapp' | 'pixelPunch' | 'jarvis' | 'readLater' | 'downloads';
+export type ProjectId =
+  | 'garezvous'
+  | 'whatsapp'
+  | 'pixelPunch'
+  | 'jarvis'
+  | 'readLater'
+  | 'downloads';
 
 export type NowId = 'ai' | 'code' | 'games';
 
@@ -6,7 +12,6 @@ export type SkillLevel = 'advanced' | 'intermediate' | 'beginner';
 
 export type Skill = {
   name: string;
-  icon: string;
   level: SkillLevel;
 };
 
@@ -20,12 +25,6 @@ export type Project = {
   kind: 'pro' | 'cours' | 'perso';
   tags: string[];
   links: ExternalLink[];
-  cover?: string;
   screens?: string[];
   webScreen?: string;
-};
-
-export type NowItem = {
-  id: NowId;
-  image: string;
 };

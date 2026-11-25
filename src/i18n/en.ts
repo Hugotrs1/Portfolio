@@ -24,15 +24,12 @@ export const en: Dictionary = {
     switchLabel: 'FR',
     switchHref: '/',
     switchTitle: 'Version française',
-    switchName: 'Français',
   },
   hero: {
-    status: 'Work-study at Agelid',
-    location: 'Normandy, France',
-    school: "Bachelor's at CESI Rouen",
-    role: 'Work-study software developer',
+    role: 'Work-study software developer, Normandy, France',
+    title: 'I own the front end of GarezVous, the parking app for local authorities',
     introduction:
-      "I work on GarezVous, Agelid's parking app, on mobile and web with Flutter. I led its redesign and added parking with and without an account. I care as much about polishing an interface as about understanding the business behind it.",
+      'I led its Flutter redesign at Agelid, on mobile and web, and added parking with and without an account. I care as much about polishing an interface as about understanding the business behind it.',
     highlights: [
       { term: 'Currently', detail: 'Work-study at Agelid' },
       { term: 'Flagship project', detail: 'GarezVous, live on iOS, Android and web' },
@@ -44,27 +41,27 @@ export const en: Dictionary = {
     cta: 'See projects',
   },
   sections: {
-    profile: { label: 'Profile', title: 'From mobile to back office.' },
+    profile: { label: 'Profile', title: 'From screen design to release' },
     projects: {
       label: 'Projects',
-      title: 'Selected work.',
+      title: 'GarezVous, then five school and personal projects',
       intro:
-        'One professional project in production, school projects, and tools I built for my own use.',
+        'One professional project in production, school projects, and tools I built for my own use',
     },
     skills: {
       label: 'Skills',
-      title: 'Everyday tools.',
-      intro: 'The technologies I use at school, in projects and at work.',
+      title: 'Flutter first, with Java and SQL around it',
+      intro: 'The technologies I use at school, in projects and at work',
     },
     now: {
       label: 'Right now',
-      title: 'What keeps me busy.',
-      intro: "What I'm learning right now, and what keeps me busy away from code.",
+      title: 'AI, Flutter, Java and video games',
+      intro: "What I'm learning right now, and what keeps me busy away from code",
     },
     github: {
       label: 'GitHub',
-      title: 'Latest repositories.',
-      intro: 'My most recent public repositories, synced automatically.',
+      title: 'My latest public repositories',
+      intro: 'The list is read live from GitHub',
     },
   },
   profile: {
@@ -111,11 +108,11 @@ export const en: Dictionary = {
     ],
   },
   projects: {
-    featuredLabel: 'Professional project · in production',
+    featuredLabel: 'Professional project, in production',
     roleLabel: 'Role',
     stackLabel: 'Stack',
     achievementsLabel: 'What I built',
-    webCaption: 'Web version: same Flutter code as mobile',
+    webCaption: 'Web version, same Flutter code as mobile',
     screens: {
       hint: 'Select a screen to enlarge it',
       open: 'Open screen',
@@ -128,11 +125,11 @@ export const en: Dictionary = {
         title: 'GarezVous',
         description:
           "On-street parking app for the residents of local authorities. Agelid's client towns enable it as a module from Logipol Web, the company's main platform.",
-        role: 'Redesign of the app, on mobile and web.',
+        role: 'Redesign of the app, on mobile and web',
         achievements: [
-          'Added parking with an account.',
-          'Added parking without an account, using only the licence plate.',
-          'Redesigned both the look and the code of the app.',
+          'Added parking with an account',
+          'Added parking without an account, using only the licence plate',
+          'Redesigned both the look and the code of the app',
         ],
         screenTitles: ['Create a ticket', 'Home', 'Subscriptions'],
         screenAlts: [
@@ -176,17 +173,14 @@ export const en: Dictionary = {
     ai: {
       title: 'AI & emerging tech',
       body: 'I closely follow how AI and emerging technologies evolve, and I try out whatever can improve the way I build software.',
-      alt: 'Glowing filaments evoking a neural network',
     },
     code: {
       title: 'Going deeper with Flutter & Java',
       body: 'I keep leveling up on the languages I use every day, on mobile as well as on the back office.',
-      alt: 'Laptop showing code in an editor',
     },
     games: {
       title: 'Video games',
       body: 'Away from code, I play both competitive and single-player games, for the challenge as much as for the story.',
-      alt: 'Backlit game controller',
     },
   },
   github: {
@@ -199,7 +193,7 @@ export const en: Dictionary = {
   },
   contact: {
     label: 'Contact',
-    title: 'An idea, a project, a question?',
+    title: 'Write to me about an idea, a project or a question',
     intro:
       'The simplest way: an email with some context (topic, stack, goal). Otherwise, the form works just fine.',
     cvLabel: 'Resume (PDF, in French)',
@@ -213,10 +207,10 @@ export const en: Dictionary = {
       sending: 'Sending',
       sent: 'Message sent',
       hint: 'Reply within 24 hours',
-      missing: 'Please fill in all fields.',
-      invalidEmail: 'Invalid email address.',
+      missing: 'Please fill in all fields',
+      invalidEmail: 'Invalid email address',
       error: "Your message couldn't be sent right now. Please try again later.",
-      success: 'Thanks, your message has been sent.',
+      success: 'Thanks, your message has been sent',
     },
   },
   footer: { backToTop: 'Back to top' },

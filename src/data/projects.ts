@@ -13,7 +13,6 @@ export const projects: Project[] = [
         url: 'https://play.google.com/store/apps/details?id=com.agelid.garezvous',
       },
     ],
-    cover: '/images/photos/parking.webp',
     screens: [
       '/images/garezvous/mobile-stationnement.jpg',
       '/images/garezvous/mobile-accueil.jpg',

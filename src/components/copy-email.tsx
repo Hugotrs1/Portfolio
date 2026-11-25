@@ -1,10 +1,8 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import { Check } from './icons';
-import { easeOutExpo } from './reveal';
 
 export function CopyEmail({
   email,
@@ -34,22 +32,10 @@ export function CopyEmail({
     <button
       type="button"
       onClick={onClick}
-      className="label text-paper/60 hover:text-paper relative inline-flex h-5 items-center overflow-hidden transition-colors"
+      className="label text-on-ink-soft hover:text-paper inline-flex items-center gap-2 transition-colors duration-150"
     >
-      <AnimatePresence mode="popLayout" initial={false}>
-        <motion.span
-          key={done ? 'copied' : 'copy'}
-          aria-live="polite"
-          initial={{ y: '110%' }}
-          animate={{ y: 0 }}
-          exit={{ y: '-110%' }}
-          transition={{ duration: 0.45, ease: easeOutExpo }}
-          className={`inline-flex items-center gap-2 ${done ? 'text-accent' : ''}`}
-        >
-          {done ? <Check /> : null}
-          {done ? copied : copy}
-        </motion.span>
-      </AnimatePresence>
+      {done ? <Check className="h-4 w-4" /> : null}
+      <span aria-live="polite">{done ? copied : copy}</span>
     </button>
   );
 }

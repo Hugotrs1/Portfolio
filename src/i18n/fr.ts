@@ -24,15 +24,12 @@ export const fr: Dictionary = {
     switchLabel: 'EN',
     switchHref: '/en/',
     switchTitle: 'English version',
-    switchName: 'English',
   },
   hero: {
-    status: 'En alternance chez Agelid',
-    location: 'Normandie, France',
-    school: 'Bachelor CESI Rouen',
-    role: 'Développeur informatique en alternance',
+    role: 'Développeur informatique en alternance, Normandie',
+    title: "Je porte le front de GarezVous, l'application de stationnement des collectivités",
     introduction:
-      "Je travaille sur GarezVous, l'application de stationnement d'Agelid, sur mobile et sur web en Flutter. J'ai mené sa refonte et ajouté le stationnement avec et sans compte. J'aime autant soigner une interface que comprendre le métier qui se cache derrière.",
+      "J'ai mené sa refonte en Flutter chez Agelid, sur mobile et sur web, et ajouté le stationnement avec et sans compte. J'aime autant soigner une interface que comprendre le métier qui se cache derrière.",
     highlights: [
       { term: 'Actuellement', detail: 'Alternance chez Agelid' },
       { term: 'Projet phare', detail: 'GarezVous, en production sur iOS, Android et web' },
@@ -41,27 +38,27 @@ export const fr: Dictionary = {
     cta: 'Voir les projets',
   },
   sections: {
-    profile: { label: 'Profil', title: 'Du mobile au back-office.' },
+    profile: { label: 'Profil', title: 'De la conception des écrans à la mise en production' },
     projects: {
       label: 'Projets',
-      title: 'Travaux choisis.',
+      title: 'GarezVous, puis cinq projets de cours et personnels',
       intro:
-        'Un projet professionnel en production, des projets de formation, et des outils que je me suis codés pour mon usage perso.',
+        'Un projet professionnel en production, des projets de formation, et des outils que je me suis codés pour mon usage perso',
     },
     skills: {
       label: 'Compétences',
-      title: 'Outils du quotidien.',
-      intro: 'Les technologies utilisées en cours, en projets et en alternance.',
+      title: 'Flutter avant tout, Java et SQL autour',
+      intro: 'Les technologies utilisées en cours, en projets et en alternance',
     },
     now: {
       label: 'En ce moment',
-      title: "Ce qui m'occupe.",
-      intro: "Ce que j'apprends en ce moment, et ce qui m'occupe en dehors du code.",
+      title: 'IA, Flutter, Java et jeux vidéo',
+      intro: "Ce que j'apprends en ce moment, et ce qui m'occupe en dehors du code",
     },
     github: {
       label: 'GitHub',
-      title: 'Derniers dépôts.',
-      intro: 'Mes dépôts publics les plus récents, synchronisés automatiquement.',
+      title: 'Mes derniers dépôts publics',
+      intro: 'La liste est lue en direct sur GitHub',
     },
   },
   profile: {
@@ -108,11 +105,11 @@ export const fr: Dictionary = {
     ],
   },
   projects: {
-    featuredLabel: 'Projet professionnel · en production',
+    featuredLabel: 'Projet professionnel, en production',
     roleLabel: 'Rôle',
     stackLabel: 'Stack',
     achievementsLabel: 'Réalisations',
-    webCaption: 'Version web : même code Flutter que le mobile',
+    webCaption: 'Version web, même code Flutter que le mobile',
     screens: {
       hint: "Sélectionner un écran pour l'agrandir",
       open: "Ouvrir l'écran",
@@ -125,11 +122,11 @@ export const fr: Dictionary = {
         title: 'GarezVous',
         description:
           "Application de stationnement ponctuel destinée aux usagers des collectivités. Les communes clientes d'Agelid l'activent comme module depuis Logipol Web, la plateforme principale de l'entreprise.",
-        role: "Refonte de l'application, sur mobile et sur web.",
+        role: "Refonte de l'application, sur mobile et sur web",
         achievements: [
-          'Ajout du stationnement avec compte.',
-          "Ajout du stationnement sans compte, à partir de la seule plaque d'immatriculation.",
-          "Refonte du design et du code de l'application.",
+          'Ajout du stationnement avec compte',
+          "Ajout du stationnement sans compte, à partir de la seule plaque d'immatriculation",
+          "Refonte du design et du code de l'application",
         ],
         screenTitles: ['Créer un ticket', 'Accueil', 'Abonnements'],
         screenAlts: [
@@ -147,7 +144,7 @@ export const fr: Dictionary = {
       pixelPunch: {
         title: 'Pixel Punch',
         description:
-          "Jeu de boxe en pixel art, en Python orienté objet avec Pygame : contre une IA à trois niveaux ou à deux sur le même clavier. Projet de NSI, porté dans le navigateur en WebAssembly et jouable en ligne.",
+          'Jeu de boxe en pixel art, en Python orienté objet avec Pygame : contre une IA à trois niveaux ou à deux sur le même clavier. Projet de NSI, porté dans le navigateur en WebAssembly et jouable en ligne.',
       },
       jarvis: {
         title: 'Jarvis',
@@ -173,17 +170,14 @@ export const fr: Dictionary = {
     ai: {
       title: 'IA & nouvelles technos',
       body: "Je suis de près l'évolution de l'IA et des technologies émergentes, et je teste ce qui peut améliorer ma façon de développer.",
-      alt: 'Réseau de filaments lumineux évoquant un réseau de neurones',
     },
     code: {
       title: 'Approfondir Flutter & Java',
       body: "Je continue de monter en compétence sur les langages que j'utilise au quotidien, côté mobile comme côté back-office.",
-      alt: 'Ordinateur portable affichant du code dans un éditeur',
     },
     games: {
       title: 'Jeux vidéo',
       body: "En dehors du code, je joue aussi bien à des jeux compétitifs qu'à des jeux solo, pour le challenge comme pour l'histoire.",
-      alt: 'Manette de jeu rétroéclairée',
     },
   },
   github: {
@@ -196,7 +190,7 @@ export const fr: Dictionary = {
   },
   contact: {
     label: 'Contact',
-    title: 'Une idée, un projet, une question ?',
+    title: 'Écrivez-moi pour une idée, un projet ou une question',
     intro:
       "Le plus simple : un mail avec le contexte (sujet, stack, objectif). Sinon, le formulaire fait très bien l'affaire.",
     cvLabel: 'CV (PDF)',
@@ -210,10 +204,10 @@ export const fr: Dictionary = {
       sending: 'Envoi en cours',
       sent: 'Message envoyé',
       hint: 'Réponse sous 24 h',
-      missing: 'Merci de remplir tous les champs.',
-      invalidEmail: 'Adresse email invalide.',
-      error: "Impossible d'envoyer le message pour le moment. Réessaie plus tard.",
-      success: 'Merci, ton message a bien été envoyé.',
+      missing: 'Merci de remplir tous les champs',
+      invalidEmail: 'Adresse email invalide',
+      error: "Impossible d'envoyer le message pour le moment. Réessayez plus tard.",
+      success: 'Merci, votre message a bien été envoyé',
     },
   },
   footer: { backToTop: 'Retour en haut' },

@@ -1,45 +1,38 @@
 import type { PropsWithChildren, ReactNode } from 'react';
 
 import { Container } from './container';
-import { Reveal } from './reveal';
-import { SplitText } from './split-text';
 
 type SectionProps = PropsWithChildren<{
   id: string;
-  index: string;
   label: string;
   title: string;
   intro?: ReactNode;
 }>;
 
-export function Section({ id, index, label, title, intro, children }: SectionProps) {
+export function Section({ id, label, title, intro, children }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="py-24 sm:py-32">
+    <section id={id} aria-labelledby={`${id}-title`} className="py-16 sm:py-24">
       <Container>
-        <div className="border-line grid gap-y-6 border-t pt-6 lg:grid-cols-12 lg:gap-x-8">
-          <p className="label text-muted lg:col-span-3">
-            <span className="text-accent">{index}</span>
-            <span className="mx-2">/</span>
+        <div className="grid gap-y-4 lg:grid-cols-12 lg:gap-x-8">
+          <p className="text-muted flex items-start gap-3 lg:col-span-3 lg:pt-2">
+            <span aria-hidden className="bay-mark text-ink" />
             {label}
           </p>
           <div className="lg:col-span-9">
-            <SplitText
-              as="h2"
+            <h2
               id={`${id}-title`}
-              text={title}
-              className="font-serif text-5xl leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl"
-            />
+              className="max-w-3xl text-[2rem] leading-[1.1] font-medium tracking-[-0.02em] text-balance sm:text-[2.75rem]"
+            >
+              {title}
+            </h2>
             {intro ? (
-              <Reveal
-                delay={0.15}
-                className="text-ink-soft mt-6 max-w-xl text-lg leading-relaxed sm:text-xl"
-              >
+              <p className="text-ink-soft mt-4 max-w-xl text-lg leading-[1.6] text-pretty">
                 {intro}
-              </Reveal>
+              </p>
             ) : null}
           </div>
         </div>
-        <div className="mt-16 sm:mt-20">{children}</div>
+        <div className="mt-12 sm:mt-16">{children}</div>
       </Container>
     </section>
   );

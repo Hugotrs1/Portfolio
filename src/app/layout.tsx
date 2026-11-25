@@ -7,7 +7,6 @@ import './globals.css';
 const schibstedGrotesk = Schibsted_Grotesk({
   variable: '--font-schibsted-grotesk',
   subsets: ['latin'],
-  style: ['normal', 'italic'],
 });
 
 export const metadata: Metadata = {
@@ -18,9 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
-      <body
-        className={`${schibstedGrotesk.variable} font-sans antialiased`}
-      >
+      <body className={`${schibstedGrotesk.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

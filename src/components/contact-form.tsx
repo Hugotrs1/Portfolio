@@ -1,14 +1,11 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState, type FormEvent } from 'react';
 
 import type { Dictionary } from '@/i18n';
 import { sendContactEmail, type ContactPayload } from '@/lib/contact';
 
-import { ArrowUpRight, Check } from './icons';
-import { Magnetic } from './magnetic';
-import { easeOutExpo } from './reveal';
+import { Check } from './icons';
 
 type Feedback = { kind: 'success' | 'error'; message: string } | null;
 
@@ -16,9 +13,8 @@ const emptyForm: ContactPayload = { name: '', email: '', message: '' };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const fieldClass =
-  'dark-field peer w-full border-b border-paper/25 bg-transparent pb-3 pt-6 text-lg text-paper outline-none transition-colors duration-300 placeholder:text-transparent focus:border-paper';
-const labelClass =
-  'label pointer-events-none absolute left-0 top-6 text-paper/50 transition-all duration-300 peer-focus:top-0 peer-focus:text-paper peer-autofill:top-0 peer-[:not(:placeholder-shown)]:top-0';
+  'dark-field mt-2 w-full rounded-[10px] border border-white/10 bg-ink-raised px-4 py-3 text-paper transition-colors duration-150 hover:border-white/25 focus:border-paper';
+const labelClass = 'label text-on-ink-soft';
 
 export function ContactForm({ t }: { t: Dictionary['contact']['form'] }) {
   const [form, setForm] = useState<ContactPayload>(emptyForm);
@@ -75,47 +71,44 @@ export function ContactForm({ t }: { t: Dictionary['contact']['form'] }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-8">
-      <div className="grid gap-8 sm:grid-cols-2">
-        <label className="relative block">
+    <form onSubmit={handleSubmit} noValidate className="space-y-6">
+      <div className="grid gap-6 sm:grid-cols-2">
+        <label className="block">
+          <span className={labelClass}>{t.name}</span>
           <input
             type="text"
             name="name"
             autoComplete="name"
             required
-            placeholder={t.name}
             value={form.name}
             onChange={(event) => update('name')(event.target.value)}
             className={fieldClass}
           />
-          <span className={labelClass}>{t.name}</span>
         </label>
-        <label className="relative block">
+        <label className="block">
+          <span className={labelClass}>{t.email}</span>
           <input
             type="email"
             name="email"
             autoComplete="email"
             required
-            placeholder={t.email}
             value={form.email}
             onChange={(event) => update('email')(event.target.value)}
             className={fieldClass}
           />
-          <span className={labelClass}>{t.email}</span>
         </label>
       </div>
 
-      <label className="relative block">
+      <label className="block">
+        <span className={labelClass}>{t.message}</span>
         <textarea
           name="message"
           required
-          rows={4}
-          placeholder={t.message}
+          rows={6}
           value={form.message}
           onChange={(event) => update('message')(event.target.value)}
-          className={`${fieldClass} resize-none`}
+          className={`${fieldClass} block resize-none`}
         />
-        <span className={labelClass}>{t.message}</span>
       </label>
 
       <input
@@ -127,52 +120,28 @@ export function ContactForm({ t }: { t: Dictionary['contact']['form'] }) {
         className="hidden"
       />
 
-      <div className="flex flex-wrap items-center justify-between gap-6">
-        <Magnetic>
-          <button
-            type="submit"
-            disabled={sending || sent}
-            className={`group inline-flex items-center overflow-hidden rounded-full px-7 py-3.5 text-base transition-colors duration-500 ${
-              sent
-                ? 'bg-accent text-paper'
-                : 'bg-paper text-ink hover:bg-accent hover:text-paper disabled:opacity-60'
-            }`}
-          >
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                key={sent ? 'sent' : sending ? 'sending' : 'send'}
-                initial={{ y: '150%' }}
-                animate={{ y: 0 }}
-                exit={{ y: '-150%' }}
-                transition={{ duration: 0.5, ease: easeOutExpo }}
-                className="inline-flex items-center gap-3"
-              >
-                {sent ? <Check className="h-4 w-4" /> : null}
-                {sent ? t.sent : sending ? t.sending : t.send}
-                {sent ? null : (
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                )}
-              </motion.span>
-            </AnimatePresence>
-          </button>
-        </Magnetic>
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+        <button
+          type="submit"
+          disabled={sending || sent}
+          className="bg-paper text-ink inline-flex h-12 items-center gap-2 rounded-[10px] px-5 text-base font-medium transition-[background-color,transform] duration-150 hover:bg-white active:scale-[0.98] disabled:opacity-70"
+        >
+          {sent ? <Check className="h-4 w-4" /> : null}
+          {sent ? t.sent : sending ? t.sending : t.send}
+        </button>
 
-        <AnimatePresence mode="wait">
-          {feedback ? (
-            <motion.p
-              key={feedback.message}
-              role="status"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              className={`text-base ${feedback.kind === 'error' ? 'text-[#f0a58a]' : 'text-paper'}`}
-            >
-              {feedback.message}
-            </motion.p>
-          ) : (
-            <p className="label text-paper/50">{t.hint}</p>
-          )}
-        </AnimatePresence>
+        <p
+          role="status"
+          className={
+            feedback
+              ? feedback.kind === 'error'
+                ? 'text-[#f0a58a]'
+                : 'text-paper'
+              : 'label text-on-ink-muted'
+          }
+        >
+          {feedback ? feedback.message : t.hint}
+        </p>
       </div>
     </form>
   );

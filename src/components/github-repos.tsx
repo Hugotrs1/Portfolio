@@ -1,13 +1,11 @@
 'use client';
 
-import { animate, motion, useInView, useReducedMotion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { person } from '@/data/profile';
 import type { Dictionary } from '@/i18n';
 
 import { ArrowUpRight } from './icons';
-import { easeOutExpo } from './reveal';
 
 type Repo = {
   id: number;
@@ -75,49 +73,24 @@ export function GithubRepos({ t }: { t: Dictionary['github'] }) {
 
   return (
     <div>
-      {status === 'ready' ? (
-        <dl className="mb-12 flex gap-12 sm:gap-20">
-          {[
-            { value: stats.repos, label: t.repos },
-            { value: stats.languages, label: t.languages },
-          ].map((item) => (
-            <div key={item.label} className="flex flex-col-reverse gap-2">
-              <dt className="label text-muted">{item.label}</dt>
-              <dd className="font-serif text-6xl leading-none sm:text-7xl">
-                <CountUp value={item.value} />
-              </dd>
-            </div>
-          ))}
-        </dl>
-      ) : null}
-
       <ul aria-busy={status === 'loading'}>
         {status === 'loading'
-          ? Array.from({ length: 4 }, (_, index) => (
-              <li
-                key={index}
-                className="border-line flex h-[5.5rem] items-center border-t last:border-b"
-              >
-                <span className="bg-paper-deep h-4 w-1/3 animate-pulse" />
+          ? Array.from({ length: 6 }, (_, index) => (
+              <li key={index} className="border-line flex h-20 items-center border-t last:border-b">
+                <span className="bg-paper-deep h-4 w-1/3 rounded" />
               </li>
             ))
-          : repos.map((repo, index) => (
-              <motion.li
-                key={repo.id}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.06, ease: easeOutExpo }}
-                className="border-line border-t last:border-b"
-              >
+          : repos.map((repo) => (
+              <li key={repo.id} className="border-line border-t last:border-b">
                 <a
                   href={repo.html_url}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="group hover:bg-paper-deep/60 grid items-baseline gap-2 py-6 transition-colors duration-300 sm:grid-cols-12 sm:gap-8 sm:px-3"
+                  className="hover:text-accent grid items-baseline gap-x-8 gap-y-1 py-5 transition-colors duration-150 lg:grid-cols-12"
                 >
-                  <span className="font-mono text-base sm:col-span-4">{repo.name}</span>
-                  <span className="text-ink-soft text-base sm:col-span-5">{repo.description}</span>
-                  <span className="label text-muted flex items-center justify-between gap-4 sm:col-span-3 sm:justify-end">
+                  <span className="lg:col-span-4">{repo.name}</span>
+                  <span className="text-ink-soft lg:col-span-5">{repo.description}</span>
+                  <span className="label text-muted flex items-center justify-between gap-4 lg:col-span-3 lg:justify-end">
                     <span>
                       {[
                         repo.language,
@@ -125,52 +98,31 @@ export function GithubRepos({ t }: { t: Dictionary['github'] }) {
                         dateFormat.format(new Date(repo.pushed_at)),
                       ]
                         .filter(Boolean)
-                        .join(' · ')}
+                        .join(', ')}
                     </span>
-                    <ArrowUpRight className="text-ink h-4 w-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight className="text-ink h-4 w-4 shrink-0" />
                   </span>
                 </a>
-              </motion.li>
+              </li>
             ))}
       </ul>
 
-      <a
-        href={person.github}
-        target="_blank"
-        rel="noreferrer noopener"
-        className="link-underline mt-8 inline-flex items-center gap-2 text-base"
-      >
-        {t.all}
-        <ArrowUpRight />
-      </a>
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-x-8 gap-y-2">
+        <a
+          href={person.github}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="inline-flex items-center gap-2"
+        >
+          <span className="link-underline">{t.all}</span>
+          <ArrowUpRight className="h-4 w-4" />
+        </a>
+        {status === 'ready' ? (
+          <p className="label text-muted">
+            {stats.repos} {t.repos}, {stats.languages} {t.languages}
+          </p>
+        ) : null}
+      </div>
     </div>
-  );
-}
-
-function CountUp({ value }: { value: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-10% 0px' });
-  const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!inView || !node) return;
-    const controls = animate(0, value, {
-      duration: reduceMotion ? 0 : 1.6,
-      ease: easeOutExpo,
-      onUpdate: (current) => {
-        node.textContent = String(Math.round(current));
-      },
-    });
-    return () => controls.stop();
-  }, [inView, reduceMotion, value]);
-
-  return (
-    <>
-      <span ref={ref} aria-hidden>
-        0
-      </span>
-      <span className="sr-only">{value}</span>
-    </>
   );
 }

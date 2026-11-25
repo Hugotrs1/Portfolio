@@ -5,10 +5,9 @@ import Image from 'next/image';
 import { useEffect, useLayoutEffect, useState } from 'react';
 
 import type { Dictionary } from '@/i18n/types';
+import { easeOutExpo } from '@/lib/motion';
 
 import { ArrowLeft, ArrowRight, Close } from './icons';
-import { Magnetic } from './magnetic';
-import { easeOutExpo } from './reveal';
 
 export type Screen = { src: string; title: string; alt: string };
 
@@ -22,7 +21,7 @@ type ScreenViewerProps = {
   labels: Dictionary['projects']['screens'];
 };
 
-const flightSpring = { type: 'spring', bounce: 0.18, duration: 0.75 } as const;
+const flight = { duration: 0.45, ease: easeOutExpo } as const;
 
 const slide = {
   enter: (direction: number) => ({ x: direction >= 0 ? '100%' : '-100%' }),
@@ -74,7 +73,7 @@ export function ScreenViewer({
 
     const from = offsetFrom(origin, layoutRect(frame));
     frame.style.transform = `translate(${from.x}px, ${from.y}px) scale(${from.scale})`;
-    animate(frame, { x: [from.x, 0], y: [from.y, 0], scale: [from.scale, 1] }, flightSpring);
+    animate(frame, { x: [from.x, 0], y: [from.y, 0], scale: [from.scale, 1] }, flight);
     // L'ouverture ne se joue qu'une fois, au montage.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -91,8 +90,8 @@ export function ScreenViewer({
 
     const to = offsetFrom(origin, layoutRect(frame));
     Promise.all([
-      animate(frame, to, { ...flightSpring, bounce: 0.1, duration: 0.6 }),
-      animate('[data-fade]', { opacity: 0 }, { duration: 0.35 }),
+      animate(frame, to, flight),
+      animate('[data-fade]', { opacity: 0 }, { duration: 0.3 }),
     ]).then(safeToRemove);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPresent]);
@@ -100,7 +99,7 @@ export function ScreenViewer({
   useEffect(() => {
     scope.current.querySelector<HTMLElement>('[data-close]')?.focus({ preventScroll: true });
 
-    // Bloque le défilement de la page (Lenis compris) tant que la visionneuse est ouverte.
+    // Bloque le défilement de la page tant que la visionneuse est ouverte.
     const block = (event: Event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -144,16 +143,15 @@ export function ScreenViewer({
       role="dialog"
       aria-modal="true"
       aria-label={`${project} · ${screen.title}`}
-      data-lenis-prevent
       className="fixed inset-0 z-[100]"
     >
       <motion.div
         data-fade
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.3 }}
         onClick={onClose}
-        className="bg-ink/95 absolute inset-0 backdrop-blur-sm"
+        className="bg-ink absolute inset-0"
       />
 
       <motion.button
@@ -163,8 +161,8 @@ export function ScreenViewer({
         onClick={onClose}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        className="text-paper hover:bg-paper hover:text-ink absolute top-5 right-5 z-10 inline-flex items-center gap-2 rounded-full border border-white/25 px-4 py-2 text-[0.95rem] transition-colors duration-300 sm:top-8 sm:right-8"
+        transition={{ duration: 0.3 }}
+        className="text-paper hover:bg-paper hover:text-ink absolute top-5 right-5 z-10 inline-flex h-11 items-center gap-2 rounded-[10px] border border-white/25 px-4 text-[0.9375rem] transition-colors duration-150 sm:top-8 sm:right-8"
       >
         {labels.close}
         <Close />
@@ -173,7 +171,7 @@ export function ScreenViewer({
       <div className="pointer-events-none relative flex h-full flex-col items-center justify-center gap-8 px-6 py-20 lg:flex-row lg:gap-20">
         <div
           data-frame
-          className="pointer-events-auto relative aspect-[600/1237] h-[min(62svh,40rem)] shrink-0 rounded-[2.2rem] bg-[#0b0b0a] p-2 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.9)] ring-1 ring-white/10 lg:h-[min(80svh,46rem)]"
+          className="pointer-events-auto relative aspect-[600/1237] h-[min(62svh,40rem)] shrink-0 rounded-[2.2rem] bg-[#0b0b0a] p-2 shadow-[0_24px_64px_-24px_rgba(0,0,0,0.7)] ring-1 ring-white/10 lg:h-[min(80svh,46rem)]"
         >
           <div className="relative h-full w-full overflow-hidden rounded-[1.8rem] bg-[#0b0b0a]">
             <AnimatePresence initial={false} custom={direction}>
@@ -184,7 +182,7 @@ export function ScreenViewer({
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.6, ease: easeOutExpo }}
+                transition={{ duration: 0.4, ease: easeOutExpo }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.25}
@@ -209,46 +207,38 @@ export function ScreenViewer({
 
         <motion.div
           data-fade
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.35, ease: easeOutExpo }}
+          transition={{ duration: 0.4, delay: 0.15, ease: easeOutExpo }}
           className="text-paper pointer-events-auto w-full max-w-xs text-center lg:text-left"
         >
-          <p className="label text-paper/50">
-            <span className="text-accent">{String(index + 1).padStart(2, '0')}</span>
-            <span className="mx-2">/</span>
-            {String(screens.length).padStart(2, '0')}
-            <span className="mx-2">·</span>
-            {project}
+          <p className="label text-on-ink-soft">
+            {project}, {index + 1}/{screens.length}
           </p>
           <div aria-live="polite">
-            <h3 className="mt-3 font-serif text-3xl leading-none lg:mt-4 lg:text-5xl">
+            <h3 className="mt-2 text-[2rem] leading-[1.1] font-medium tracking-[-0.02em] lg:text-[2.75rem]">
               {screen.title}
             </h3>
-            <p className="text-paper/70 mt-4 hidden leading-relaxed lg:block">{screen.alt}</p>
+            <p className="text-on-ink-soft mt-4 hidden leading-relaxed lg:block">{screen.alt}</p>
           </div>
 
           <div className="mt-6 flex justify-center gap-3 lg:mt-10 lg:justify-start">
-            <Magnetic>
-              <button
-                type="button"
-                onClick={() => go(-1)}
-                aria-label={labels.previous}
-                className="hover:bg-paper hover:text-ink flex h-12 w-12 items-center justify-center rounded-full border border-white/25 transition-colors duration-300"
-              >
-                <ArrowLeft className="h-4 w-4" />
-              </button>
-            </Magnetic>
-            <Magnetic>
-              <button
-                type="button"
-                onClick={() => go(1)}
-                aria-label={labels.next}
-                className="hover:bg-paper hover:text-ink flex h-12 w-12 items-center justify-center rounded-full border border-white/25 transition-colors duration-300"
-              >
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </Magnetic>
+            <button
+              type="button"
+              onClick={() => go(-1)}
+              aria-label={labels.previous}
+              className="hover:bg-paper hover:text-ink flex h-12 w-12 items-center justify-center rounded-[10px] border border-white/25 transition-colors duration-150"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => go(1)}
+              aria-label={labels.next}
+              className="hover:bg-paper hover:text-ink flex h-12 w-12 items-center justify-center rounded-[10px] border border-white/25 transition-colors duration-150"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
         </motion.div>
       </div>

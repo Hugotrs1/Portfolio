@@ -1,102 +1,89 @@
-'use client';
-
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-
 import { person } from '@/data/profile';
+import { projects } from '@/data/projects';
 import type { Dictionary } from '@/i18n';
 
 import { Container } from './container';
 import { ArrowDown } from './icons';
-import { Magnetic } from './magnetic';
-import { easeOutExpo } from './reveal';
-import { SplitText } from './split-text';
+import { ParkingLot } from './parking-lot';
+import { Phone } from './phone';
 
-export function Hero({ hero }: { hero: Dictionary['hero'] }) {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const titleY = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']);
+const [parkingScreen, homeScreen] =
+  projects.find((project) => project.id === 'garezvous')?.screens ?? [];
 
-  const fadeIn = (delay: number) => ({
-    initial: { opacity: 0, y: 16 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 1.1, delay, ease: easeOutExpo },
-  });
+type HeroProps = { hero: Dictionary['hero']; screenAlts?: string[] };
+
+export function Hero({ hero, screenAlts = [] }: HeroProps) {
+  const phone = {
+    sizes: '(min-width: 1024px) 18vw, 40vw',
+    priority: true,
+    className: 'animate-rise',
+  };
 
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden pt-28 pb-20 sm:pt-36">
-      <Container>
-        <motion.div
-          {...fadeIn(0.1)}
-          className="label text-muted flex flex-wrap items-center gap-x-8 gap-y-2"
-        >
-          <span className="text-ink inline-flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="bg-accent absolute inline-flex h-full w-full animate-ping rounded-full opacity-60" />
-              <span className="bg-accent relative inline-flex h-2 w-2 rounded-full" />
-            </span>
-            {hero.status}
-          </span>
-          <span>{hero.location}</span>
-          <span>{hero.school}</span>
-        </motion.div>
-
-        <motion.h1
-          style={{ y: titleY }}
-          className="mt-10 font-serif leading-[0.85] tracking-[-0.02em]"
-        >
-          <SplitText
-            immediate
-            delay={0.2}
-            text={person.firstName}
-            className="block text-[clamp(4.5rem,15vw,14rem)]"
-          />
-          <SplitText
-            immediate
-            delay={0.35}
-            text={person.lastName}
-            className="text-accent block pl-[8vw] text-[clamp(4.5rem,15vw,14rem)] italic"
-          />
-        </motion.h1>
-
-        <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:gap-8">
-          <div className="space-y-8 lg:col-span-6">
-            <motion.p
-              {...fadeIn(0.6)}
-              className="text-ink-soft max-w-lg text-lg leading-relaxed sm:text-xl"
-            >
-              <span className="text-ink">{hero.role}.</span> {hero.introduction}
-            </motion.p>
-
-            <motion.div {...fadeIn(0.75)} className="flex flex-wrap items-center gap-x-6 gap-y-4">
-              <Magnetic>
-                <a
-                  href="#projets"
-                  className="group bg-ink text-paper hover:bg-accent inline-flex items-center gap-3 rounded-full px-6 py-3 text-base transition-colors duration-300"
-                >
-                  {hero.cta}
-                  <ArrowDown className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-y-0.5" />
-                </a>
-              </Magnetic>
-              <a href={`mailto:${person.email}`} className="link-underline text-base">
+    <>
+      <section
+        id="top"
+        className="bg-ink text-paper relative overflow-hidden lg:flex lg:min-h-[clamp(40rem,100svh,60rem)] lg:items-center"
+      >
+        <Container className="relative z-10 pt-28 pb-12 lg:py-28">
+          <div className="animate-rise max-w-[38rem] lg:max-w-[min(38rem,42vw)]">
+            <p className="text-on-ink-soft text-lg">{hero.role}</p>
+            <h1 className="mt-4 text-[2.5rem] leading-[1.06] font-medium tracking-[-0.02em] text-balance xl:text-[3.5rem]">
+              {hero.title}
+            </h1>
+            <p className="text-on-ink-soft mt-6 max-w-xl text-lg leading-[1.6]">
+              {hero.introduction}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#projets"
+                className="bg-paper text-ink inline-flex h-12 items-center gap-2 rounded-[10px] px-5 text-base font-medium transition-[background-color,transform] duration-150 hover:bg-white active:scale-[0.98]"
+              >
+                {hero.cta}
+                <ArrowDown className="h-4 w-4" />
+              </a>
+              <a
+                href={`mailto:${person.email}`}
+                className="bg-ink-raised hover:bg-ink-soft inline-flex h-12 items-center rounded-[10px] px-5 text-base ring-1 ring-white/10 transition-[background-color,transform] duration-150 active:scale-[0.98]"
+              >
                 {person.email}
               </a>
-            </motion.div>
+            </div>
           </div>
+        </Container>
 
-          <motion.dl {...fadeIn(0.85)} className="lg:col-span-5 lg:col-start-8">
-            {hero.highlights.map((item) => (
-              <div
-                key={item.term}
-                className="border-line grid grid-cols-3 gap-4 border-t py-4 last:border-b"
-              >
-                <dt className="label text-muted pt-0.5">{item.term}</dt>
-                <dd className="col-span-2">{item.detail}</dd>
-              </div>
-            ))}
-          </motion.dl>
+        <div className="relative h-[27rem] overflow-hidden sm:h-[34rem] lg:absolute lg:inset-0 lg:h-auto">
+          <ParkingLot
+            className="top-[-6.5rem] left-[6vw] [--bay:clamp(10rem,44vw,15rem)] sm:left-[16vw] lg:top-[calc(50%-var(--bay)*1.35)] lg:left-[51vw] lg:[--bay:clamp(13rem,18.5vw,17rem)]"
+            bays={[
+              {
+                key: 'home',
+                content: <Phone src={homeScreen} alt={screenAlts[1] ?? ''} {...phone} />,
+              },
+              {
+                key: 'parking',
+                blue: true,
+                content: <Phone src={parkingScreen} alt={screenAlts[0] ?? ''} {...phone} />,
+              },
+              { key: 'free-1' },
+              { key: 'free-2' },
+              { key: 'free-3' },
+              { key: 'free-4' },
+            ]}
+          />
         </div>
+      </section>
+
+      <Container>
+        <dl className="grid gap-x-8 sm:grid-cols-3">
+          {hero.highlights.map((item) => (
+            <div key={item.term} className="border-line border-b py-6 sm:py-8">
+              <dt className="label text-muted">{item.term}</dt>
+              <dd className="mt-1 text-pretty">{item.detail}</dd>
+            </div>
+          ))}
+        </dl>
       </Container>
-    </section>
+    </>
   );
 }

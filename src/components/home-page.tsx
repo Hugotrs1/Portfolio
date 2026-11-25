@@ -8,12 +8,9 @@ import { Footer } from './footer';
 import { GithubRepos } from './github-repos';
 import { Header } from './header';
 import { Hero } from './hero';
-import { LanguageCurtain } from './language-switch';
-import { Marquee } from './marquee';
 import { Now } from './now';
 import { Profile } from './profile';
 import { ProjectList } from './project-list';
-import { ScrollProgress } from './scroll-progress';
 import { Section } from './section';
 import { Skills } from './skills';
 
@@ -26,19 +23,17 @@ export function HomePage({ dict }: { dict: Dictionary }) {
   return (
     <>
       <DocumentLang lang={dict.locale} />
-      <ScrollProgress />
       <Header nav={dict.nav} />
 
       <main>
-        <Hero hero={dict.hero} />
-        <Marquee />
+        <Hero hero={dict.hero} screenAlts={dict.projects.items.garezvous.screenAlts} />
 
-        <Section id="profil" index="01" {...sections.profile}>
+        <Section id="profil" {...sections.profile}>
           <Profile profile={dict.profile} />
         </Section>
 
-        <Section id="projets" index="02" {...sections.projects}>
-          <div className="space-y-24">
+        <Section id="projets" {...sections.projects}>
+          <div className="space-y-16 lg:space-y-24">
             {featured.map((project) => (
               <FeaturedProject
                 key={project.id}
@@ -47,23 +42,19 @@ export function HomePage({ dict }: { dict: Dictionary }) {
                 labels={dict.projects}
               />
             ))}
-            <ProjectList
-              projects={others}
-              texts={dict.projects.items}
-              start={featured.length + 1}
-            />
+            <ProjectList projects={others} texts={dict.projects.items} />
           </div>
         </Section>
 
-        <Section id="competences" index="03" {...sections.skills}>
+        <Section id="competences" {...sections.skills}>
           <Skills levels={dict.skills.levels} />
         </Section>
 
-        <Section id="en-ce-moment" index="04" {...sections.now}>
+        <Section id="en-ce-moment" {...sections.now}>
           <Now texts={dict.now} />
         </Section>
 
-        <Section id="github" index="05" {...sections.github}>
+        <Section id="github" {...sections.github}>
           <GithubRepos t={dict.github} />
         </Section>
 
@@ -71,7 +62,6 @@ export function HomePage({ dict }: { dict: Dictionary }) {
       </main>
 
       <Footer backToTop={dict.footer.backToTop} />
-      <LanguageCurtain />
     </>
   );
 }

@@ -27,13 +27,10 @@ export type Dictionary = {
     switchLabel: string;
     switchHref: string;
     switchTitle: string;
-    switchName: string;
   };
   hero: {
-    status: string;
-    location: string;
-    school: string;
     role: string;
+    title: string;
     introduction: string;
     highlights: { term: string; detail: string }[];
     cta: string;
@@ -64,7 +61,7 @@ export type Dictionary = {
     items: Record<ProjectId, ProjectText>;
   };
   skills: { levels: Record<SkillLevel, string> };
-  now: Record<NowId, { title: string; body: string; alt: string }>;
+  now: Record<NowId, { title: string; body: string }>;
   github: {
     unavailable: string;
     all: string;
