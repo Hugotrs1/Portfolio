@@ -5,7 +5,7 @@
     <title>CV | Hugo Troussel | Développeur informatique</title>
     <meta name="author" content="Hugo Troussel" />
     <style>
-      /* Une seule colonne, police standard, aucun tableau ni image : lisible par les ATS. */
+      /* Une seule colonne, police standard, aucun tableau, aucune information dans une image : lisible par les ATS. */
       @page {
         size: A4;
         margin: 0;
@@ -39,6 +39,18 @@
         text-decoration: none;
       }
 
+      header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .photo {
+        flex: none;
+        width: 100px;
+        height: 125px;
+        border-radius: 6px;
+      }
       h1 {
         margin: 0;
         font-size: 24pt;
@@ -58,7 +70,7 @@
       }
 
       h2 {
-        margin: 19px 0 8px;
+        margin: 17px 0 8px;
         padding-bottom: 3px;
         border-bottom: 1px solid var(--line);
         font-size: 12.5pt;
@@ -103,17 +115,22 @@
     </style>
   </head>
   <body>
-    <h1>Hugo Troussel</h1>
-    <p class="title">Développeur informatique, Flutter mobile et web</p>
-    <p class="contact">
-      07 49 57 94 14 | <a href="mailto:trousselhugo@gmail.com">trousselhugo@gmail.com</a> | Région
-      de Rouen, Normandie | Mobile, permis B, véhiculé
-    </p>
-    <p class="contact">
-      <a href="https://portfolio.hugotrs.fr">portfolio.hugotrs.fr</a> |
-      <a href="https://github.com/Hugotrs1">github.com/Hugotrs1</a> |
-      <a href="https://www.linkedin.com/in/hugotroussel/">linkedin.com/in/hugotroussel</a>
-    </p>
+    <header>
+      <div>
+        <h1>Hugo Troussel</h1>
+        <p class="title">Développeur informatique, Flutter mobile et web</p>
+        <p class="contact">
+          07 49 57 94 14 | <a href="mailto:trousselhugo@gmail.com">trousselhugo@gmail.com</a>
+        </p>
+        <p class="contact">Région de Rouen, Normandie | Mobile, permis B, véhiculé</p>
+        <p class="contact">
+          <a href="https://portfolio.hugotrs.fr">portfolio.hugotrs.fr</a> |
+          <a href="https://github.com/Hugotrs1">github.com/Hugotrs1</a> |
+          <a href="https://www.linkedin.com/in/hugotroussel/">linkedin.com/in/hugotroussel</a>
+        </p>
+      </div>
+      <img class="photo" src="photo.jpg" alt="Portrait de Hugo Troussel" />
+    </header>
 
     <h2>Profil</h2>
     <p>
